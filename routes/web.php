@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/* Rutas para administrar tokens */
+Route::get('/personal-clients', 'HomeController@personalToken')->name('personal-clients');
+Route::get('/tokens-clients', 'HomeController@tokenClients')->name('tokens-clients');
+Route::get('/authorized-clients', 'HomeController@authorizedClients')->name('authorized-clients');
