@@ -12,6 +12,6 @@ class BookController extends ApiController
     {
         $books = Book::all();
 
-        return response()->json(['data' => $books, 'code' => 200]);
+        return $this->showAll($books, 200);
     }
 }
