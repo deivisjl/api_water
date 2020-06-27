@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Acceso;
 
-use App\Rol;
+use App\UsuarioRol;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
-class RolController extends ApiController
+class UsuarioRolController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +42,10 @@ class RolController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Rol  $rol
+     * @param  \App\UsuarioRol  $usuarioRol
      * @return \Illuminate\Http\Response
      */
-    public function show(Rol $rol)
+    public function show(UsuarioRol $usuarioRol)
     {
         //
     }
@@ -53,10 +53,10 @@ class RolController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Rol  $rol
+     * @param  \App\UsuarioRol  $usuarioRol
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rol $rol)
+    public function edit(UsuarioRol $usuarioRol)
     {
         //
     }
@@ -65,10 +65,10 @@ class RolController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Rol  $rol
+     * @param  \App\UsuarioRol  $usuarioRol
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, UsuarioRol $usuarioRol)
     {
         //
     }
@@ -76,10 +76,10 @@ class RolController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Rol  $rol
+     * @param  \App\UsuarioRol  $usuarioRol
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rol $rol)
+    public function destroy(UsuarioRol $usuarioRol)
     {
         //
     }
