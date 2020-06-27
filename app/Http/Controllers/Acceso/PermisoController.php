@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Acceso;
 
 use App\Permiso;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ApiController;
 
-class PermisoController extends Controller
+class PermisoController extends ApiController
 {
     /**
      * Display a listing of the resource.
