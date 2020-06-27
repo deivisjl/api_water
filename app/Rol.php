@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Acceso;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;

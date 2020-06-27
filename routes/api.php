@@ -23,4 +23,4 @@ Route::post('oauth/token','\Laravel\Passport\Http\Controllers\AccessTokenControl
 Route::get('books','BookController@getBooks');
 
 /* Rutas de acceso */
-Route::resource('roles','Acceso\RolController');
+Route::resource('roles','Acceso\RolController',['except' => ['create','edit']]);
