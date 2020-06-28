@@ -26,6 +26,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::define('admin-action',function($user){
+            return $user->esAdministrador();
+        });
+
         Passport::routes();
 
         Passport::tokensExpireIn(now()->addDays(15));

@@ -13,7 +13,7 @@ class RolController extends ApiController
     *     path="/api/roles",
     *     summary="Mostrar roles",
     *     tags={"Roles"},
-    *     security={ {"bearer": {} }},    
+    *     security={ {"bearer": {} }},        
     *     @SWG\Response(
     *         response=200,
     *         description="Mostrar todos los roles."
@@ -37,6 +37,13 @@ class RolController extends ApiController
     *     summary="Guardar nuevos roles",
     *     tags={"Roles"},
     *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Rol",
+    *          description="Datos del nuevo rol",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
     *     @SWG\Response(
     *         response=200,
     *         description="Guardar nuevos roles."
@@ -57,7 +64,14 @@ class RolController extends ApiController
     *     path="/api/roles/{id}",
     *     summary="Mostrar un rol especifico",
     *     tags={"Roles"},
-    *     security={ {"bearer": {} }},      
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del rol a mostrar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),      
     *     @SWG\Response(
     *         response=200,
     *         description="Mostrar un rol especifico."
@@ -78,6 +92,13 @@ class RolController extends ApiController
     *     summary="Actualizar un rol especifico",
     *     tags={"Roles"},
     *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Rol",
+    *          description="Datos del rol a actualizar",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
     *     @SWG\Response(
     *         response=200,
     *         description="Actualizar un rol especifico."
@@ -99,6 +120,13 @@ class RolController extends ApiController
     *     summary="Eliminar un rol especifico",
     *     tags={"Roles"},
     *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del rol a eliminar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),
     *     @SWG\Response(
     *         response=200,
     *         description="Eliminar un rol especifico."

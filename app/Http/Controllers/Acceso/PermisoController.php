@@ -35,6 +35,13 @@ class PermisoController extends ApiController
     *     summary="Guardar nuevos permisos",
     *     tags={"Permisos"},
     *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Permiso",
+    *          description="Datos del nuevo permiso",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
     *     @SWG\Response(
     *         response=200,
     *         description="Guardar nuevos permisos."
@@ -55,7 +62,14 @@ class PermisoController extends ApiController
     *     path="/api/permisos/{id}",
     *     summary="Mostrar un permiso especifico",
     *     tags={"Permisos"},
-    *     security={ {"bearer": {} }},      
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del permiso a mostrar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),
     *     @SWG\Response(
     *         response=200,
     *         description="Mostrar un permiso especifico."
@@ -76,6 +90,13 @@ class PermisoController extends ApiController
     *     summary="Actualizar un permiso especifico",
     *     tags={"Permisos"},
     *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Permiso",
+    *          description="Datos del permiso a actualizar",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
     *     @SWG\Response(
     *         response=200,
     *         description="Actualizar un permiso especifico."
@@ -97,6 +118,13 @@ class PermisoController extends ApiController
     *     summary="Eliminar un permiso especifico",
     *     tags={"Permisos"},
     *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del permiso a eliminar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),
     *     @SWG\Response(
     *         response=200,
     *         description="Eliminar un permiso especifico."

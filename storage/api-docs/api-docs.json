@@ -30,6 +30,15 @@
                     "Permisos"
                 ],
                 "summary": "Guardar nuevos permisos",
+                "parameters": [
+                    {
+                        "name": "Permiso",
+                        "in": "path",
+                        "description": "Datos del nuevo permiso",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Guardar nuevos permisos."
@@ -51,6 +60,15 @@
                     "Permisos"
                 ],
                 "summary": "Mostrar un permiso especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del permiso a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Mostrar un permiso especifico."
@@ -70,6 +88,15 @@
                     "Permisos"
                 ],
                 "summary": "Eliminar un permiso especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del permiso a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Eliminar un permiso especifico."
@@ -91,6 +118,15 @@
                     "Permisos"
                 ],
                 "summary": "Actualizar un permiso especifico",
+                "parameters": [
+                    {
+                        "name": "Permiso",
+                        "in": "path",
+                        "description": "Datos del permiso a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Actualizar un permiso especifico."
@@ -131,6 +167,15 @@
                     "Roles"
                 ],
                 "summary": "Guardar nuevos roles",
+                "parameters": [
+                    {
+                        "name": "Rol",
+                        "in": "path",
+                        "description": "Datos del nuevo rol",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Guardar nuevos roles."
@@ -152,6 +197,15 @@
                     "Roles"
                 ],
                 "summary": "Mostrar un rol especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del rol a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Mostrar un rol especifico."
@@ -171,6 +225,15 @@
                     "Roles"
                 ],
                 "summary": "Eliminar un rol especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del rol a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Eliminar un rol especifico."
@@ -192,6 +255,15 @@
                     "Roles"
                 ],
                 "summary": "Actualizar un rol especifico",
+                "parameters": [
+                    {
+                        "name": "Rol",
+                        "in": "path",
+                        "description": "Datos del rol a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Actualizar un rol especifico."

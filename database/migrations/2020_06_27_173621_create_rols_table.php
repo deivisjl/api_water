@@ -18,6 +18,7 @@ class CreateRolsTable extends Migration
             $table->string('nombre');
             $table->string('slug');
             $table->text('descripcion');
+            $table->integer('orden')->default(0);
             $table->timestamps();
         });
     }

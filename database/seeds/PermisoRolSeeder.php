@@ -1,5 +1,6 @@
 <?php
 
+use App\Permiso;
 use Illuminate\Database\Seeder;
 
 class PermisoRolSeeder extends Seeder
@@ -11,6 +12,6 @@ class PermisoRolSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
     }
 }

@@ -22,6 +22,7 @@ class CreatePermisosTable extends Migration
             $table->string('ruta_api')->nullable();
             $table->enum('visibilidad', ['visible', 'oculto']);
             $table->text('descripcion');
+            $table->integer('orden')->default(0);
             $table->timestamps();
         });
     }
