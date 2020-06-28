@@ -1,0 +1,212 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API SISCAP",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/permisos": {
+            "get": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Mostrar permisos",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los permisos."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Guardar nuevos permisos",
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos permisos."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/permisos/{id}": {
+            "get": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Mostrar un permiso especifico",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un permiso especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Eliminar un permiso especifico",
+                "responses": {
+                    "200": {
+                        "description": "Eliminar un permiso especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/permisos/{permiso}": {
+            "put": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Actualizar un permiso especifico",
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un permiso especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Mostrar roles",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los roles."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Guardar nuevos roles",
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos roles."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Mostrar un rol especifico",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un rol especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Eliminar un rol especifico",
+                "responses": {
+                    "200": {
+                        "description": "Eliminar un rol especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/roles/{rol}": {
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Actualizar un rol especifico",
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un rol especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {}
+}

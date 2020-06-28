@@ -24,3 +24,4 @@ Route::get('books','BookController@getBooks');
 
 /* Rutas de acceso */
 Route::resource('roles','Acceso\RolController',['except' => ['create','edit']]);
+Route::resource('permisos','Acceso\PermisoController',['except' => ['create','edit']]);

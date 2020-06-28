@@ -18,6 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .bg-dark {
+            background-color: #1b1b1b!important;
+        }
+
+    </style>
 </head>
 <body>
     <div id="app">
@@ -31,18 +37,23 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @auth
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('personal-clients') }}">Personal Clients</a>
-                        </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('tokens-clients') }}">Token Clients</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('authorized-clients') }}">Authorized Clients</a>
-                        </li>
-                    </ul>
+                           <a class="nav-link" href="{{ route('personal-clients') }}">Personal Clients</a>
+                       </li>
+                       <li class="nav-item active">
+                           <a class="nav-link" href="{{ route('tokens-clients') }}">Token Clients</a>
+                       </li>
+                       <li class="nav-item active">
+                           <a class="nav-link" href="{{ route('authorized-clients') }}">Authorized Clients</a>
+                       </li>
+                       <li class="nav-item active">
+                           <a class="nav-link" href="/api/documentation">Documentación</a>
+                       </li>
+                   </ul>    
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

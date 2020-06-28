@@ -8,77 +8,105 @@ use App\Http\Controllers\ApiController;
 
 class PermisoController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     /**
+    * @SWG\Get(
+    *     path="/api/permisos",
+    *     summary="Mostrar permisos",
+    *     tags={"Permisos"},
+    *     security={ {"bearer": {} }},    
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar todos los permisos."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function index()
     {
-        //
+        
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\Post(
+    *     path="/api/permisos",
+    *     summary="Guardar nuevos permisos",
+    *     tags={"Permisos"},
+    *     security={ {"bearer": {} }},
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Guardar nuevos permisos."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function store(Request $request)
     {
         //
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Permiso  $permiso
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\Get(
+    *     path="/api/permisos/{id}",
+    *     summary="Mostrar un permiso especifico",
+    *     tags={"Permisos"},
+    *     security={ {"bearer": {} }},      
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar un permiso especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function show(Permiso $permiso)
     {
         //
     }
-
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Permiso  $permiso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Permiso $permiso)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Permiso  $permiso
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\PUT(
+    *     path="/api/permisos/{permiso}",
+    *     summary="Actualizar un permiso especifico",
+    *     tags={"Permisos"},
+    *     security={ {"bearer": {} }},
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Actualizar un permiso especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function update(Request $request, Permiso $permiso)
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Permiso  $permiso
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\DELETE(
+    *     path="/api/permisos/{id}",
+    *     summary="Eliminar un permiso especifico",
+    *     tags={"Permisos"},
+    *     security={ {"bearer": {} }},
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Eliminar un permiso especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function destroy(Permiso $permiso)
     {
         //
