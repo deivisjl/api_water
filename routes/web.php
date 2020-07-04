@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/personal-clients', 'HomeController@personalToken')->name('personal-clients');
 Route::get('/tokens-clients', 'HomeController@tokenClients')->name('tokens-clients');
 Route::get('/authorized-clients', 'HomeController@authorizedClients')->name('authorized-clients');
+
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
