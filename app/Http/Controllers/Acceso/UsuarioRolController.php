@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Acceso;
 
+use App\User;
 use App\Permiso;
 use App\UsuarioRol;
 use Illuminate\Http\Request;
@@ -12,13 +13,13 @@ class UsuarioRolController extends ApiController
 {
     /**
     * @SWG\Get(
-    *     path="/api/usuario-rol",
+    *     path="/api/usuario-menu",
     *     summary="Listar los menus que tiene habilitado el rol",
     *     tags={"Menu"},
     *     security={ {"bearer": {} }},    
     *     @SWG\Response(
     *         response=200,
-    *         description="Mostrar todos los itmes del menu."
+    *         description="Mostrar todos los items del menu."
     *     ),
     *     @SWG\Response(
     *         response="default",

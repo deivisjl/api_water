@@ -30,7 +30,7 @@ class RolController extends ApiController
     */
     public function index()
     {
-        $roles = Rol::all();
+        $roles = Rol::orderBy('nombre','asc')->get();
 
         return $this->showAll($roles);
     }

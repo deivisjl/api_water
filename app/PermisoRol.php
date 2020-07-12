@@ -17,6 +17,6 @@ class PermisoRol extends Model
 
     public function rol()
     {
-    	return $this->belongsToMany(Rol::class);
+    	return $this->belongsTo(Rol::class);
     }
 }

@@ -28,4 +28,9 @@ Route::resource('permisos','Acceso\PermisoController',['except' => ['create','sh
 Route::get('padres','Acceso\PermisoController@padre');
 Route::get('permisos-titulo','Acceso\PermisoController@titulo');
 
-Route::get('usuario-rol','Acceso\UsuarioRolController@menu');
+Route::get('usuario-menu','Acceso\UsuarioRolController@menu');
+Route::get('usuario-rol','Acceso\UsuarioRolController@index');
+
+Route::resource('usuarios','Acceso\UsuarioController',['except' => ['create','show']]);
+Route::get('usuarios-roles/{id}','Acceso\UsuarioController@roles');
+Route::post('usuarios-roles','Acceso\UsuarioController@updateRoles');
