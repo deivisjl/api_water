@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function usuario_rol(){
 
-        return $this->hasMany(UsuarioRol::class);
+        return $this->hasMany(UsuarioRol::class,'usuario_id');
     }
 
     public function esAdministrador(){

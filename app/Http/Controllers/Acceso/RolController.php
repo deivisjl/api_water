@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Acceso;
 
 use App\Rol;
+use App\PermisoRol;
+use App\UsuarioRol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ApiController;
+use Illuminate\Database\QueryException;
     
 class RolController extends ApiController
 {
@@ -56,13 +60,36 @@ class RolController extends ApiController
     */
     public function store(Request $request)
     {
-        //
+        $rules = [
+                'nombre' => 'required|string',
+                'descripcion' => 'required|string',
+                'permisos' => 'nullable|array'
+            ];
+
+        $this->validate($request, $rules);
+
+        return DB::transaction(function() use($request){
+
+            $rol = new Rol();
+            $rol->nombre = $request->get('nombre');
+            $rol->descripcion = $request->get('descripcion');
+            $rol->save();
+
+            foreach ($request->permisos as $key => $value) {
+                PermisoRol::create([
+                    'rol_id' => $rol->id,
+                    'permiso_id' => $value
+                ]);
+            }
+
+            return $this->showOne($rol, 201);
+        });
     }
 
     /**
     * @SWG\Get(
-    *     path="/api/roles/{id}",
-    *     summary="Mostrar un rol especifico",
+    *     path="/api/roles/{id}/edit",
+    *     summary="Obtener un rol especifico",
     *     tags={"Roles"},
     *     security={ {"bearer": {} }},
     *      @SWG\Parameter(
@@ -74,7 +101,7 @@ class RolController extends ApiController
     *      ),      
     *     @SWG\Response(
     *         response=200,
-    *         description="Mostrar un rol especifico."
+    *         description="Obtener un rol especifico."
     *     ),
     *     @SWG\Response(
     *         response="default",
@@ -82,9 +109,14 @@ class RolController extends ApiController
     *     )
     * )
     */
-    public function show(Rol $rol)
+    public function edit($id)
     {
-        //
+        $entidad = Rol::with('permiso_rol')
+                        ->where('rol.id',$id)
+                        ->first();
+
+        return $this->showOne($entidad);
+        //return response()->json(['data' => $entidad]);
     }
     /**
     * @SWG\PUT(
@@ -109,9 +141,34 @@ class RolController extends ApiController
     *     )
     * )
     */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, Rol $role)
     {
-        //
+        $rules = [
+                'nombre' => 'required|string',
+                'descripcion' => 'required|string',
+                'permisos' => 'nullable|array'
+            ];
+
+        $this->validate($request, $rules);
+
+        return DB::transaction(function() use($request, $role){
+
+            $role->permiso_rol()->delete();
+
+            foreach ($request->permisos as $key => $value) {
+                PermisoRol::create([
+                    'rol_id' => $role->id,
+                    'permiso_id' => $value
+                ]);
+            }
+
+            $role->nombre = $request->get('nombre');
+            $role->descripcion = $request->get('descripcion');
+            $role->save();
+
+            return $this->showOne($role,201);
+        });
+
     }
 
     /**
@@ -137,8 +194,19 @@ class RolController extends ApiController
     *     )
     * )
     */
-    public function destroy(Rol $rol)
+    public function destroy(Rol $role)
     {
-        //
+        $verificar =  UsuarioRol::where('rol_id',$role->id)->first();
+
+        if($verificar)
+        {
+            throw new \Exception("No se puede eliminar de forma permanente porque tiene registros asociados", 1);
+            
+        }
+
+        $accion = $role;
+        $role->delete();
+
+        return $this->showOne($accion);
     }
 }

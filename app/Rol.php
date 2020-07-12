@@ -30,4 +30,8 @@ class Rol extends Model
     public function usuario_rol(){
         return $this->hasMany(UsuarioRol::class);
     }
+
+    public function permiso_rol(){
+        return $this->hasMany(PermisoRol::class);
+    }
 }

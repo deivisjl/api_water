@@ -142,6 +142,27 @@
                 ]
             }
         },
+        "/api/padres": {
+            "get": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Mostrar los permisos que son padres",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los permisos que son padres."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/roles": {
             "get": {
                 "tags": [
@@ -267,6 +288,27 @@
                 "responses": {
                     "200": {
                         "description": "Actualizar un rol especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/usuario-rol": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Listar los menus que tiene habilitado el rol",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los itmes del menu."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"

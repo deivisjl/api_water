@@ -20,7 +20,7 @@ class PermisoSeeder extends Seeder
         $menu_1 = Permiso::create([
             'titulo' => 'Accesos',
             'icono' => 'lock',
-            'ruta_cliente' => '#',
+            'ruta_cliente' => '/#',
             'visibilidad' => 'visible',
             'descripcion' => 'Titulo principal de menu de acceso',
             'orden' => 1
@@ -30,8 +30,8 @@ class PermisoSeeder extends Seeder
         $permiso_1 = Permiso::create([
             'menu_titulo_id' => $menu_1->id,
             'titulo' => 'Permisos',
-            'icono' => 'pan_tool',
-            'ruta_cliente' => 'permisos',
+            'icono' => 'account_tree',
+            'ruta_cliente' => '/permisos',
             'ruta_api' => 'api/permisos',
             'visibilidad' => 'visible',
             'descripcion' => 'Submenu para permisos',
@@ -42,8 +42,8 @@ class PermisoSeeder extends Seeder
         $permiso_2 = Permiso::create([
             'menu_titulo_id' => $menu_1->id,
             'titulo' => 'Roles',
-            'icono' => 'all-inbox',
-            'ruta_cliente' => 'roles',
+            'icono' => 'all_inbox',
+            'ruta_cliente' => '/roles',
             'ruta_api' => 'api/roles',
             'visibilidad' => 'visible',
             'descripcion' => 'Submenu para roles',
@@ -53,12 +53,12 @@ class PermisoSeeder extends Seeder
         //Primer submenu [USUARIOS] de menu [ACCESOS]    
         $permiso_3 = Permiso::create([
             'menu_titulo_id' => $menu_1->id,
-            'titulo' => 'Usuarios',
-            'icono' => 'account-box',
-            'ruta_cliente' => 'rol-usuario',
+            'titulo' => 'Asignar roles',
+            'icono' => 'account_box',
+            'ruta_cliente' => '/rol-usuario',
             'ruta_api' => 'api/rol-usuario',
             'visibilidad' => 'visible',
-            'descripcion' => 'Submenu para rol-usuario',
+            'descripcion' => 'Submenu para asignar roles a usuarios',
             'orden' => 3
         ]);
         

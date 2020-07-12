@@ -2,85 +2,73 @@
 
 namespace App\Http\Controllers\Acceso;
 
+use App\Permiso;
 use App\UsuarioRol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ApiController;
 
 class UsuarioRolController extends ApiController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    * @SWG\Get(
+    *     path="/api/usuario-rol",
+    *     summary="Listar los menus que tiene habilitado el rol",
+    *     tags={"Menu"},
+    *     security={ {"bearer": {} }},    
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar todos los itmes del menu."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function menu(Request $request)
     {
-        //
-    }
+        $user = $request->user();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        // $permisos = DB::table('permiso')                        
+        //                 ->get();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\UsuarioRol  $usuarioRol
-     * @return \Illuminate\Http\Response
-     */
-    public function show(UsuarioRol $usuarioRol)
-    {
-        //
-    }
+        // $aux = $permisos;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\UsuarioRol  $usuarioRol
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UsuarioRol $usuarioRol)
-    {
-        //
-    }
+        // $menu = [];
+        // $submenu =[];
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UsuarioRol  $usuarioRol
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, UsuarioRol $usuarioRol)
-    {
-        //
-    }
+        // foreach ($permisos as $index => $permiso) 
+        // {
+        //     if($permiso->menu_titulo_id == 0)
+        //     {
+        //         $menu[$index] = $permiso;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\UsuarioRol  $usuarioRol
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(UsuarioRol $usuarioRol)
-    {
-        //
+        //         foreach ($aux as $key => $p) 
+        //         {
+        //             if($p->menu_titulo_id == $permiso->id)
+        //             {
+        //                 array_push($submenu,$p);
+        //             }
+        //         }
+
+        //         $x = array('submenu'=>$submenu);
+        //     }    
+        // }
+
+        // $menus = collect($menu);
+
+        $menus = $user->usuario_rol()
+                        ->with('rol.permiso_rol.permiso.subgrupo')
+                        ->get()
+                        ->pluck('rol.permiso_rol')
+                        ->collapse()
+                        ->pluck('permiso')
+                        ->where('menu_titulo_id',0)
+                        ->values();
+
+
+        return $this->showAll($menus);
     }
 }

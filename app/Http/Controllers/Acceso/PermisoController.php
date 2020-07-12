@@ -26,7 +26,9 @@ class PermisoController extends ApiController
     */
     public function index()
     {
-        
+        $permisos = Permiso::all();
+
+        return $this->showAll($permisos);
     }
 
     /**
@@ -54,7 +56,29 @@ class PermisoController extends ApiController
     */
     public function store(Request $request)
     {
-        //
+        $rules = [
+                'padre' => 'nullable|numeric',
+                'titulo' => 'required|string',
+                'icono' => 'required|string',
+                'ruta' => 'required|string',
+                'visible' => 'required|boolean',
+                'descripcion' => 'required|string',
+                'orden' => 'required|numeric'
+            ];
+
+        $this->validate($request, $rules);
+
+        $permiso = new Permiso();
+        $permiso->menu_titulo_id = empty($request->padre) ? 0 : $request->padre;
+        $permiso->titulo = $request->titulo;
+        $permiso->icono = $request->icono;
+        $permiso->ruta_cliente = $request->ruta;
+        $permiso->visibilidad = $request->visible ? 'visible' : 'oculto';
+        $permiso->descripcion = $request->descripcion;
+        $permiso->orden = $request->orden;
+        $permiso->save();
+
+        return $this->showOne($permiso);
     }
 
     /**
@@ -80,9 +104,9 @@ class PermisoController extends ApiController
     *     )
     * )
     */
-    public function show(Permiso $permiso)
+    public function edit(Permiso $permiso)
     {
-        //
+        return $this->showOne($permiso);
     }
     /**
     * @SWG\PUT(
@@ -109,7 +133,32 @@ class PermisoController extends ApiController
     */
     public function update(Request $request, Permiso $permiso)
     {
-        //
+        $rules = [
+                'padre' => 'nullable|numeric',
+                'titulo' => 'required|string',
+                'icono' => 'required|string',
+                'ruta' => 'required|string',
+                'visible' => 'required|boolean',
+                'descripcion' => 'required|string',
+                'orden' => 'required|numeric'
+            ];
+
+        $this->validate($request, $rules);
+
+        $permiso->menu_titulo_id = empty($request->padre) ? 0 : $request->padre;
+        $permiso->titulo = $request->titulo;
+        $permiso->icono = $request->icono;
+        $permiso->ruta_cliente = $request->ruta;
+        $permiso->visibilidad = $request->visible ? 'visible' : 'oculto';
+        $permiso->descripcion = $request->descripcion;
+        $permiso->orden = $request->orden;
+
+        if(!$permiso->isDirty())
+            return $this->errorResponse('Se debe especificar al menos un valor distinto para actualizar',423);
+        else
+            $permiso->save();
+
+        return $this->showOne($permiso,201);
     }
 
     /**
@@ -137,6 +186,58 @@ class PermisoController extends ApiController
     */
     public function destroy(Permiso $permiso)
     {
-        //
+        $accion = $permiso;
+
+        $permiso->delete();
+
+        return $this->showOne($accion,201);
+    }
+    /**
+    * @SWG\Get(
+    *     path="/api/padres",
+    *     summary="Mostrar los permisos que son padres",
+    *     tags={"Permisos"},
+    *     security={ {"bearer": {} }},    
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar todos los permisos que son padres."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function padre()
+    {
+        $permisos = Permiso::where('menu_titulo_id',0)
+                            ->orderBy('titulo','asc')
+                            ->get();
+
+        return $this->showAll($permisos);
+    }
+
+    /**
+    * @SWG\Get(
+    *     path="/api/permisos-nombre",
+    *     summary="Mostrar los permisos por nombre",
+    *     tags={"Permisos"},
+    *     security={ {"bearer": {} }},    
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar todos los permisos por nombre."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function titulo()
+    {
+        $permisos = Permiso::orderBy('titulo','asc')
+                            ->get(['id','titulo','descripcion']);
+
+        return $this->showAll($permisos);
     }
 }
