@@ -163,6 +163,27 @@
                 ]
             }
         },
+        "/api/permisos-nombre": {
+            "get": {
+                "tags": [
+                    "Permisos"
+                ],
+                "summary": "Mostrar los permisos por nombre",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los permisos por nombre."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/roles": {
             "get": {
                 "tags": [
@@ -212,12 +233,12 @@
                 ]
             }
         },
-        "/api/roles/{id}": {
+        "/api/roles/{id}/edit": {
             "get": {
                 "tags": [
                     "Roles"
                 ],
-                "summary": "Mostrar un rol especifico",
+                "summary": "Obtener un rol especifico",
                 "parameters": [
                     {
                         "name": "Id",
@@ -229,35 +250,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Mostrar un rol especifico."
-                    },
-                    "default": {
-                        "description": "Falla inesperada. Intente luego"
-                    }
-                },
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "Roles"
-                ],
-                "summary": "Eliminar un rol especifico",
-                "parameters": [
-                    {
-                        "name": "Id",
-                        "in": "path",
-                        "description": "Id del rol a eliminar",
-                        "required": true,
-                        "type": "integer"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Eliminar un rol especifico."
+                        "description": "Obtener un rol especifico."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"
@@ -300,7 +293,128 @@
                 ]
             }
         },
-        "/api/usuario-rol": {
+        "/api/roles/{id}": {
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Eliminar un rol especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del rol a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminar un rol especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/roles-obtener": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Obtener todos los roles",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Obtiene todos los roles sin paginar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Listado de todos los roles"
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Listar usuarios",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/'usuarios-roles/{id}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Listar roles actuales de un usuario",
+                "responses": {
+                    "200": {
+                        "description": "Listar roles actuales de un usuario."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Listar roles actuales de un usuario",
+                "responses": {
+                    "200": {
+                        "description": "Listar roles actuales de un usuario."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/usuario-menu": {
             "get": {
                 "tags": [
                     "Menu"
@@ -308,7 +422,7 @@
                 "summary": "Listar los menus que tiene habilitado el rol",
                 "responses": {
                     "200": {
-                        "description": "Mostrar todos los itmes del menu."
+                        "description": "Mostrar todos los items del menu."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"

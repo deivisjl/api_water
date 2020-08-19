@@ -24,6 +24,8 @@ Route::get('books','BookController@getBooks');
 
 /* Rutas de acceso */
 Route::resource('roles','Acceso\RolController',['except' => ['create','show']]);
+Route::get('roles-obtener','Acceso\RolController@obtener');
+
 Route::resource('permisos','Acceso\PermisoController',['except' => ['create','show']]);
 Route::get('padres','Acceso\PermisoController@padre');
 Route::get('permisos-titulo','Acceso\PermisoController@titulo');

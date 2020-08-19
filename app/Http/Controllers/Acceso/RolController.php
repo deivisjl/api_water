@@ -28,11 +28,36 @@ class RolController extends ApiController
     *     )
     * )
     */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Rol::orderBy('nombre','asc')->get();
+        $columna = $request['sortBy'] ? $request['sortBy'] : "nombre";
 
-        return $this->showAll($roles);
+        $criterio = $request['search'];
+
+        $orden = $request['sortDesc'] ? 'desc' : 'asc';
+
+        $filas = $request['perPage'];
+
+        $pagina = $request['page'];
+
+        $usuarios = DB::table('rol') 
+                ->select('id','nombre','descripcion') 
+                ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->orderBy($columna, $orden)
+                ->skip($pagina)
+                ->take($filas)
+                ->get();
+              
+        $count = DB::table('rol')
+                ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->count();
+               
+        $data = array(
+            'total' => $count,
+            'data' => $usuarios,
+        );
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -208,5 +233,35 @@ class RolController extends ApiController
         $role->delete();
 
         return $this->showOne($accion);
+    }
+     /**
+    * @SWG\GET(
+    *     path="/api/roles-obtener",
+    *     summary="Obtener todos los roles",
+    *     tags={"Roles"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Obtiene todos los roles sin paginar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Listado de todos los roles"
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+
+    public function obtener()
+    {
+        $roles = Rol::all();
+
+        return $this->showAll($roles);
     }
 }

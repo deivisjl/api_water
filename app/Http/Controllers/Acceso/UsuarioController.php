@@ -27,11 +27,36 @@ class UsuarioController extends ApiController
     *     )
     * )
     */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::all();
+        $columna = $request['sortBy'] ? $request['sortBy'] : "name";
 
-        return $this->showAll($usuarios);
+        $criterio = $request['search'];
+
+        $orden = $request['sortDesc'] ? 'desc' : 'asc';
+
+        $filas = $request['perPage'];
+
+        $pagina = $request['page'];
+
+        $usuarios = DB::table('users') 
+                ->select('id','name','email') 
+                ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->orderBy($columna, $orden)
+                ->skip($pagina)
+                ->take($filas)
+                ->get();
+              
+        $count = DB::table('users')
+                ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->count();
+               
+        $data = array(
+            'total' => $count,
+            'data' => $usuarios,
+        );
+
+        return response()->json($data, 200);
     }
 
     /**

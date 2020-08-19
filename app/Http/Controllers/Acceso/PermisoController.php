@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Acceso;
 
 use App\Permiso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ApiController;
 
 class PermisoController extends ApiController
@@ -24,11 +25,36 @@ class PermisoController extends ApiController
     *     )
     * )
     */
-    public function index()
+    public function index(Request $request)
     {
-        $permisos = Permiso::all();
+        $columna = $request['sortBy'] ? $request['sortBy'] : "titulo";
 
-        return $this->showAll($permisos);
+        $criterio = $request['search'];
+
+        $orden = $request['sortDesc'] ? 'desc' : 'asc';
+
+        $filas = $request['perPage'];
+
+        $pagina = $request['page'];
+
+        $usuarios = DB::table('permiso') 
+                ->select('id','titulo','icono','descripcion') 
+                ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->orderBy($columna, $orden)
+                ->skip($pagina)
+                ->take($filas)
+                ->get();
+              
+        $count = DB::table('permiso')
+                ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->count();
+               
+        $data = array(
+            'total' => $count,
+            'data' => $usuarios,
+        );
+
+        return response()->json($data, 200);
     }
 
     /**
