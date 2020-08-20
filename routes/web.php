@@ -24,4 +24,6 @@ Route::get('/personal-clients', 'HomeController@personalToken')->name('personal-
 Route::get('/tokens-clients', 'HomeController@tokenClients')->name('tokens-clients');
 Route::get('/authorized-clients', 'HomeController@authorizedClients')->name('authorized-clients');
 
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::group(['middleware' => ['preventBackHistory']], function(){
+	Route::post('logout', 'Auth\LoginController@logout')->name('logout');	
+});

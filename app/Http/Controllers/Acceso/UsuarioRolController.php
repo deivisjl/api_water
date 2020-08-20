@@ -31,44 +31,16 @@ class UsuarioRolController extends ApiController
     {
         $user = $request->user();
 
-        // $permisos = DB::table('permiso')                        
-        //                 ->get();
+        $permisos = DB::table('rol as r')
+                    ->join('usuario_rol as ur','ur.rol_id','=','r.id')
+                    ->join('permiso_rol as pr','pr.rol_id','=','r.id')
+                    ->join('permiso as p','p.id','pr.permiso_id')
+                    ->select('p.id','p.menu_titulo_id','p.titulo','p.icono','p.ruta_cliente','p.visibilidad','p.orden')
+                    ->where('ur.usuario_id','=', $user->id)
+                    ->get();
 
 
-        // $aux = $permisos;
-
-        // $menu = [];
-        // $submenu =[];
-
-        // foreach ($permisos as $index => $permiso) 
-        // {
-        //     if($permiso->menu_titulo_id == 0)
-        //     {
-        //         $menu[$index] = $permiso;
-
-        //         foreach ($aux as $key => $p) 
-        //         {
-        //             if($p->menu_titulo_id == $permiso->id)
-        //             {
-        //                 array_push($submenu,$p);
-        //             }
-        //         }
-
-        //         $x = array('submenu'=>$submenu);
-        //     }    
-        // }
-
-        // $menus = collect($menu);
-
-        $menus = $user->usuario_rol()
-                        ->with('rol.permiso_rol.permiso.subgrupo')
-                        ->get()
-                        ->pluck('rol.permiso_rol')
-                        ->collapse()
-                        ->pluck('permiso')
-                        ->where('menu_titulo_id',0)
-                        ->values();
-
+        $menus = collect($permisos);
 
         return $this->showAll($menus);
     }
