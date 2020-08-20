@@ -225,8 +225,7 @@ class RolController extends ApiController
 
         if($verificar)
         {
-            throw new \Exception("No se puede eliminar de forma permanente porque tiene registros asociados", 1);
-            
+            return $this->errorResponse("No se puede eliminar de forma permanente porque tiene registros asociados", 423);
         }
 
         $accion = $role;
