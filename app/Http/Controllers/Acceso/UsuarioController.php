@@ -126,7 +126,7 @@ class UsuarioController extends ApiController
     }
     /**
     * @SWG\Get(
-    *     path="/api/'usuarios-roles/{id}",
+    *     path="/api/usuarios-roles/{id}",
     *     summary="Listar roles actuales de un usuario",
     *     tags={"Usuarios"},
     *     security={ {"bearer": {} }},        
@@ -150,13 +150,13 @@ class UsuarioController extends ApiController
 
     /**
     * @SWG\Post(
-    *     path="/api/'usuarios-roles/{id}",
-    *     summary="Listar roles actuales de un usuario",
+    *     path="/api/usuarios-roles/{id}",
+    *     summary="Actualizar roles actuales de un usuario",
     *     tags={"Usuarios"},
     *     security={ {"bearer": {} }},        
     *     @SWG\Response(
     *         response=200,
-    *         description="Listar roles actuales de un usuario."
+    *         description="Actualizar roles actuales de un usuario."
     *     ),
     *     @SWG\Response(
     *         response="default",

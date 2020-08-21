@@ -141,7 +141,6 @@ class RolController extends ApiController
                         ->first();
 
         return $this->showOne($entidad);
-        //return response()->json(['data' => $entidad]);
     }
     /**
     * @SWG\PUT(

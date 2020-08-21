@@ -374,7 +374,7 @@
                 ]
             }
         },
-        "/api/'usuarios-roles/{id}": {
+        "/api/usuarios-roles/{id}": {
             "get": {
                 "tags": [
                     "Usuarios"
@@ -398,10 +398,10 @@
                 "tags": [
                     "Usuarios"
                 ],
-                "summary": "Listar roles actuales de un usuario",
+                "summary": "Actualizar roles actuales de un usuario",
                 "responses": {
                     "200": {
-                        "description": "Listar roles actuales de un usuario."
+                        "description": "Actualizar roles actuales de un usuario."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"
@@ -423,6 +423,425 @@
                 "responses": {
                     "200": {
                         "description": "Mostrar todos los items del menu."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/estado-permiso": {
+            "get": {
+                "tags": [
+                    "Estado Servicio"
+                ],
+                "summary": "Mostrar registros de estados de servicios",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los estados de servicios."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/estado-servicio": {
+            "post": {
+                "tags": [
+                    "Estado Servicio"
+                ],
+                "summary": "Guardar nuevos estados de servicios",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos del nuevo estado servicio",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos estados servicios."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/estado-servicio/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Estado Servicio"
+                ],
+                "summary": "Obtener un estado especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del estado a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtener un estado especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/estado-servicio/{estado}": {
+            "put": {
+                "tags": [
+                    "Estado Servicio"
+                ],
+                "summary": "Actualizar un estado especifico",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos del estado a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un estado especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/estado-servicio/{id}": {
+            "delete": {
+                "tags": [
+                    "Estado Servicio"
+                ],
+                "summary": "Eliminar un estado especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del estado a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminar un estado especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/sectores": {
+            "get": {
+                "tags": [
+                    "Sectores"
+                ],
+                "summary": "Mostrar registros de los sectores",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los sectores."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Sectores"
+                ],
+                "summary": "Guardar sectores",
+                "parameters": [
+                    {
+                        "name": "Sector",
+                        "in": "path",
+                        "description": "Datos del nuevo sector",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos sectores."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/sectores/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Sectores"
+                ],
+                "summary": "Obtener un sector especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del sector a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtener un sector especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/sectores/{sector}": {
+            "put": {
+                "tags": [
+                    "Sectores"
+                ],
+                "summary": "Actualizar un sector especifico",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos del sector a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un sector especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/sectores/{id}": {
+            "delete": {
+                "tags": [
+                    "Sectores"
+                ],
+                "summary": "Eliminar un sector especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del sector a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminar un sector especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/tipo-pago": {
+            "get": {
+                "tags": [
+                    "Tipo Pago"
+                ],
+                "summary": "Mostrar registros de los tipos de pagos",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los tipos de pagos."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Tipo Pago"
+                ],
+                "summary": "Guardar tipos de pagos",
+                "parameters": [
+                    {
+                        "name": "Tipo pago",
+                        "in": "path",
+                        "description": "Datos del nuevo tipo de pago",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos tipos de pagos."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/tipo-pago/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Tipo Pago"
+                ],
+                "summary": "Obtener un tipo especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del tipo de pago a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtener un tipo de pago especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/tipo-pago/{tipo_pago}": {
+            "put": {
+                "tags": [
+                    "Tipo Pago"
+                ],
+                "summary": "Actualizar un tipo de pago especifico",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos del tipo de pago a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un tipo de pago especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/tipo-pago/{id}": {
+            "delete": {
+                "tags": [
+                    "Tipo Pago"
+                ],
+                "summary": "Eliminar un tipo de pago especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del tipo de pago a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminar un tipo de pago especifico."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"

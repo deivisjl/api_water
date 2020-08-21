@@ -36,3 +36,8 @@ Route::get('usuario-rol','Acceso\UsuarioRolController@index');
 Route::resource('usuarios','Acceso\UsuarioController',['except' => ['create','show']]);
 Route::get('usuarios-roles/{id}','Acceso\UsuarioController@roles');
 Route::post('usuarios-roles','Acceso\UsuarioController@updateRoles');
+
+/* Rutas de catalogos */
+Route::resource('estado-servicio','Catalogos\EstadoServicioController',['except' => ['create','show']]);
+Route::resource('tipo-pago','Catalogos\TipoPagoController',['except' => ['create','show']]);
+Route::resource('sectores','Catalogos\SectorController',['except' => ['create','show']]);

@@ -83,7 +83,7 @@ class PermisoController extends ApiController
     public function store(Request $request)
     {
         $rules = [
-                'padre' => 'nullable|numeric',
+                'padre' => 'nullable',
                 'titulo' => 'required|string',
                 'icono' => 'required|string',
                 'ruta' => 'required|string',
@@ -160,7 +160,7 @@ class PermisoController extends ApiController
     public function update(Request $request, Permiso $permiso)
     {
         $rules = [
-                'padre' => 'nullable|numeric',
+                'padre' => 'nullable',
                 'titulo' => 'required|string',
                 'icono' => 'required|string',
                 'ruta' => 'required|string',
