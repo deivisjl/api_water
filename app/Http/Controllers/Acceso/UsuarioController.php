@@ -29,7 +29,7 @@ class UsuarioController extends ApiController
     */
     public function index(Request $request)
     {
-        $columna = $request['sortBy'] ? $request['sortBy'] : "name";
+        $columna = $request['sortBy'] ? $request['sortBy'] : "primer_nombre";
 
         $criterio = $request['search'];
 
@@ -40,7 +40,7 @@ class UsuarioController extends ApiController
         $pagina = $request['page'];
 
         $usuarios = DB::table('users') 
-                ->select('id','name','email') 
+                ->select('id',DB::raw('CONCAT_WS("",primer_nombre," ",segundo_nombre," ",tercer_nombre) as nombres'),DB::raw('CONCAT_WS("",primer_apellido," ",segundo_apellido) as apellidos'),'email', 'correo_electronico') 
                 ->where($columna, 'LIKE', '%' . $criterio . '%')
                 ->orderBy($columna, $orden)
                 ->skip($pagina)
