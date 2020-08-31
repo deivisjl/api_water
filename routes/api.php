@@ -20,8 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /* Ruta para obtener tokens */
 Route::post('oauth/token','\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
 
-Route::get('books','BookController@getBooks');
-
 /* Rutas de acceso */
 Route::resource('roles','Acceso\RolController',['except' => ['create','show']]);
 Route::get('roles-obtener','Acceso\RolController@obtener');

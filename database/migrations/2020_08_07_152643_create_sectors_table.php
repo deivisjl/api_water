@@ -16,7 +16,7 @@ class CreateSectorsTable extends Migration
         Schema::create('sector', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->text('descripcion');
+            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }
