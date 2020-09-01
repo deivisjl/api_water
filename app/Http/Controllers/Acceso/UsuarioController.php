@@ -71,7 +71,7 @@ class UsuarioController extends ApiController
     * @SWG\Post(
     *     path="/api/usuarios",
     *     summary="Guardar nuevos usuarios",
-    *     tags={"Roles"},
+    *     tags={"Usuarios"},
     *     security={ {"bearer": {} }},
     *      @SWG\Parameter(
     *          name="Usuarios",
@@ -131,34 +131,84 @@ class UsuarioController extends ApiController
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\Get(
+    *     path="/api/usuarios/{id}/edit",
+    *     summary="Obtener un usuario especifico",
+    *     tags={"Usuarios"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del usuario a mostrar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),      
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Obtener un usuario especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function edit($id)
     {
         //
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\PUT(
+    *     path="/api/usuarios/{usuario}",
+    *     summary="Actualizar un usuario especifico",
+    *     tags={"Usuarios"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="usuario",
+    *          description="Datos del usuario a actualizar",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Actualizar un usuario especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function update(Request $request, $id)
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\DELETE(
+    *     path="/api/usuarios/{id}",
+    *     summary="Eliminar un usuario especifico",
+    *     tags={"Usuarios"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del usuario a eliminar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Eliminar un usuario especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function destroy($id)
     {
         $usuario = User::findOrFail($id);
