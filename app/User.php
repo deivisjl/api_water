@@ -5,14 +5,17 @@ namespace App;
 use Illuminate\Support\Facades\DB;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, SoftDeletes;
 
     const USUARIO_ADMINISTRADOR = 'Administrador';
+
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.

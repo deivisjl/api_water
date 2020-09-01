@@ -22,9 +22,13 @@ class CreateServiciosTable extends Migration
             $table->text('referencia_direccion')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
+            $table->date('fecha_solicitud');
+            $table->date('fecha_aprobación')->nullable();
+            $table->date('fecha_visita')->nullable();
             $table->foreign('usuario_id')->references('id')->on('users');
             $table->foreign('sector_id')->references('id')->on('sector');
             $table->foreign('estado_servicio_id')->references('id')->on('estado_servicio');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

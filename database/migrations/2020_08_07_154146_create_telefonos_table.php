@@ -15,9 +15,9 @@ class CreateTelefonosTable extends Migration
     {
         Schema::create('telefono', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('servicio_id')->unsigned();
+            $table->bigInteger('usuario_id')->unsigned();
             $table->bigInteger('numero');
-            $table->foreign('servicio_id')->references('id')->on('servicio');
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

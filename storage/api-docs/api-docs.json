@@ -372,6 +372,34 @@
                         "bearer": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Guardar nuevos usuarios",
+                "parameters": [
+                    {
+                        "name": "Usuarios",
+                        "in": "path",
+                        "description": "Datos del nuevo usuario",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos usuarios."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/api/usuarios-roles/{id}": {

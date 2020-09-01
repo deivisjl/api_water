@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Acceso;
 
 use App\User;
+use App\Telefono;
 use App\UsuarioRol;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -31,6 +33,10 @@ class UsuarioController extends ApiController
     {
         $columna = $request['sortBy'] ? $request['sortBy'] : "primer_nombre";
 
+        $columna = $columna == 'nombres' ? 'primer_nombre' : $columna;
+
+        $columna = $columna == 'apellidos' ? 'primer_apellido' : $columna;
+
         $criterio = $request['search'];
 
         $orden = $request['sortDesc'] ? 'desc' : 'asc';
@@ -42,6 +48,7 @@ class UsuarioController extends ApiController
         $usuarios = DB::table('users') 
                 ->select('id',DB::raw('CONCAT_WS("",primer_nombre," ",segundo_nombre," ",tercer_nombre) as nombres'),DB::raw('CONCAT_WS("",primer_apellido," ",segundo_apellido) as apellidos'),'email', 'correo_electronico') 
                 ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->whereNull('deleted_at')
                 ->orderBy($columna, $orden)
                 ->skip($pagina)
                 ->take($filas)
@@ -49,6 +56,7 @@ class UsuarioController extends ApiController
               
         $count = DB::table('users')
                 ->where($columna, 'LIKE', '%' . $criterio . '%')
+                ->whereNull('deleted_at')
                 ->count();
                
         $data = array(
@@ -60,35 +68,66 @@ class UsuarioController extends ApiController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * @SWG\Post(
+    *     path="/api/usuarios",
+    *     summary="Guardar nuevos usuarios",
+    *     tags={"Roles"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Usuarios",
+    *          description="Datos del nuevo usuario",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Guardar nuevos usuarios."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function store(Request $request)
     {
-        //
-    }
+        $rules = [
+            'correo_electronico' => 'nullable|email|unique:users',
+            'direccion' => 'required',
+            'email' => 'required|numeric|unique:users',
+            'primer_apellido' => 'required',
+            'primer_nombre' => 'required',
+            'segundo_apellido' => 'nullable',
+            'segundo_nombre' => 'nullable',
+            'telefono' => 'required|numeric',
+            'tercer_nombre' => 'nullable'
+        ];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $this->validate($request, $rules, $this->validacion());
+
+        return DB::transaction(function() use($request){
+
+            $usuario = new User();
+            $usuario->correo_electronico = $request->get('correo_electronico');
+            $usuario->direccion_residencia = $request->get('direccion');
+            $usuario->email = $request->get('email');
+            $usuario->primer_apellido = $request->get('primer_apellido');
+            $usuario->primer_nombre = $request->get('primer_nombre');
+            $usuario->segundo_apellido = $request->get('segundo_apellido');
+            $usuario->segundo_nombre = $request->get('segundo_nombre');
+            $usuario->tercer_nombre = $request->get('tercer_nombre');
+            $usuario->password = bcrypt($this->crearCredencial());
+            $usuario->save();
+
+            $telefono = new Telefono();
+            $telefono->usuario_id = $usuario->id;
+            $telefono->numero =  $request->get('telefono');
+            $telefono->save();
+
+            return $this->showMessage('Registro generado con éxito', 200);
+        });
+
     }
 
     /**
@@ -122,7 +161,13 @@ class UsuarioController extends ApiController
      */
     public function destroy($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        $registro = $usuario;
+
+        $usuario->delete();
+
+        return $this->showOne($registro);
     }
     /**
     * @SWG\Get(
@@ -188,5 +233,23 @@ class UsuarioController extends ApiController
             return $this->showOne($usuario);
         });
         
+    }
+
+    public function crearCredencial()
+    {
+        $credencial = Str::random(8);
+
+        return $credencial;
+    }
+
+    public function validacion()
+    {
+        $messages = [
+                        'email.required' => 'El campo dpi es requerido',//'required|numeric|unique:users',
+                        'email.numeric' => 'El campo dpi es númerico',
+                        'email.unique' => 'El número de dpi ya ha sido utilizado',
+                    ];
+
+        return $messages;
     }
 }
