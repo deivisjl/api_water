@@ -197,4 +197,11 @@ class SectorController extends ApiController
         return $this->showOne($accion,201);
 
     }
+
+    public function sectores()
+    {
+        $registro = Sector::all();
+
+        return $this->showAll($registro);
+    }
 }

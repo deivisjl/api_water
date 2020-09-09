@@ -31,7 +31,8 @@ Route::get('permisos-titulo','Acceso\PermisoController@titulo');
 Route::get('usuario-menu','Acceso\UsuarioRolController@menu');
 Route::get('usuario-rol','Acceso\UsuarioRolController@index');
 
-Route::resource('usuarios','Acceso\UsuarioController',['except' => ['create','show']]);
+Route::resource('usuarios','Acceso\UsuarioController',['except' => ['create']]);
+Route::get('usuario-buscar/{criterio}','Acceso\UsuarioController@buscar');
 Route::get('usuarios-roles/{id}','Acceso\UsuarioController@roles');
 Route::post('usuarios-roles','Acceso\UsuarioController@updateRoles');
 
@@ -39,3 +40,7 @@ Route::post('usuarios-roles','Acceso\UsuarioController@updateRoles');
 Route::resource('estado-servicio','Catalogos\EstadoServicioController',['except' => ['create','show']]);
 Route::resource('tipo-pago','Catalogos\TipoPagoController',['except' => ['create','show']]);
 Route::resource('sectores','Catalogos\SectorController',['except' => ['create','show']]);
+Route::get('sectores-obtener','Catalogos\SectorController@sectores');
+
+/* Rutas de solicitud */
+Route::resource('solicitudes','Solicitud\SolicitudController',['except' => ['create','show']]); 

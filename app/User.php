@@ -69,4 +69,9 @@ class User extends Authenticatable
                 
         return !empty($rol) ? true : false;        
     }
+
+    public function telefono()
+    {
+        return $this->hasMany(Telefono::class,'usuario_id');
+    }
 }

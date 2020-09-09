@@ -15,10 +15,10 @@ class CatalogoSeeder extends Seeder
     public function run()
     {
         EstadoServicio::insert([
-            ['nombre' => 'En trámite', 'descripcion' => 'Servicio solicitado'],
-            ['nombre' => 'Vigente','descripcion' => 'Servicio vigente'],
-            ['nombre' => 'Suspendido', 'descripcion' => 'Servicio suspendido'],
-            ['nombre' => 'Revocado', 'descripcion' => 'Servicio revocado']
+            ['nombre' => 'En trámite', 'descripcion' => 'Servicio solicitado','inicia_tramite' => '1'],
+            ['nombre' => 'Vigente','descripcion' => 'Servicio vigente','inicia_tramite' => '0'],
+            ['nombre' => 'Suspendido', 'descripcion' => 'Servicio suspendido','inicia_tramite' => '0'],
+            ['nombre' => 'Revocado', 'descripcion' => 'Servicio revocado','inicia_tramite' => '0']
         ]);
 
         Sector::insert([

@@ -7,6 +7,7 @@ use App\Telefono;
 use App\UsuarioRol;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ApiController;
@@ -65,6 +66,16 @@ class UsuarioController extends ApiController
         );
 
         return response()->json($data, 200);
+    }
+
+    public function show($id)
+    {
+        $registros = DB::table('users') 
+                    ->select('id',DB::raw('CONCAT_WS("",primer_nombre," ",segundo_nombre," ",tercer_nombre,"",primer_apellido," ",segundo_apellido) as nombre'),'email as dpi') 
+                    ->where('id',$id)
+                    ->first();
+
+        return response()->json(['data' => $registros],200);
     }
 
     /**
@@ -155,7 +166,12 @@ class UsuarioController extends ApiController
     */
     public function edit($id)
     {
-        //
+        $registro = DB::table('users as u')
+                    ->leftJoin('telefono as t','t.usuario_id','u.id')
+                    ->select('u.primer_nombre','u.segundo_nombre','u.tercer_nombre','u.primer_apellido','u.segundo_apellido','u.direccion_residencia','u.email','u.correo_electronico','t.numero as telefono')
+                    ->first();
+
+        return response()->json(['data' => $registro],200);
     }
 
     /**
@@ -183,7 +199,42 @@ class UsuarioController extends ApiController
     */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'correo_electronico' => 'nullable|email|unique:users',
+            'direccion' => 'required',
+            'email' => 'required|numeric|unique:users,email,'.$id,
+            'primer_apellido' => 'required',
+            'primer_nombre' => 'required',
+            'segundo_apellido' => 'nullable',
+            'segundo_nombre' => 'nullable',
+            'telefono' => 'required|numeric',
+            'tercer_nombre' => 'nullable'
+        ];
+
+        $this->validate($request, $rules, $this->validacion());
+
+        return DB::transaction(function() use($request, $id){
+
+            $usuario = User::findOrFail($id);
+            $usuario->correo_electronico = $request->get('correo_electronico');
+            $usuario->direccion_residencia = $request->get('direccion');
+            $usuario->email = $request->get('email');
+            $usuario->primer_apellido = $request->get('primer_apellido');
+            $usuario->primer_nombre = $request->get('primer_nombre');
+            $usuario->segundo_apellido = $request->get('segundo_apellido');
+            $usuario->segundo_nombre = $request->get('segundo_nombre');
+            $usuario->tercer_nombre = $request->get('tercer_nombre');
+            $usuario->password = bcrypt($this->crearCredencial());
+            $usuario->save();
+
+            $telefono = Telefono::findOrFail($usuario->id);
+            $telefono->usuario_id = $usuario->id;
+            $telefono->numero =  $request->get('telefono');
+            $telefono->save();
+
+            return $this->showMessage('Registro generado con éxito', 200);
+        });
+
     }
 
     /**
@@ -290,6 +341,32 @@ class UsuarioController extends ApiController
         $credencial = Str::random(8);
 
         return $credencial;
+    }
+
+    /**
+    * @SWG\Get(
+    *     path="/api/usuario-buscar/{criterio}",
+    *     summary="Buscar un usuario por nombre",
+    *     tags={"Usuarios"},
+    *     security={ {"bearer": {} }},        
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar usuarios según criterio de busqueda."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function buscar($criterio)
+    {
+        $registros = DB::table('users') 
+                    ->select('id',DB::raw('CONCAT_WS("",primer_nombre," ",segundo_nombre," ",tercer_nombre,"",primer_apellido," ",segundo_apellido) as nombre'),'email as dpi') 
+                    ->where('primer_nombre', 'LIKE', '%' . $criterio . '%')
+                    ->get();
+
+        return response()->json(['data' => $registros],200);
     }
 
     public function validacion()

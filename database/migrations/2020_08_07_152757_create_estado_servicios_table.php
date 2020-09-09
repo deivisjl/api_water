@@ -17,6 +17,7 @@ class CreateEstadoServiciosTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->text('descripcion');
+            $table->integer('inicia_tramite')->default(0);
             $table->timestamps();
         });
     }

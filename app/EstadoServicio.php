@@ -9,6 +9,6 @@ class EstadoServicio extends Model
     protected $table = 'estado_servicio';
 
     protected $fillable = [
-        'id', 'nombre', 'descripcion',
+        'id', 'nombre', 'descripcion','inicia_tramite'
     ];
 }
