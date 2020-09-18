@@ -23,7 +23,8 @@ class Servicio extends Model
 		'lat',
 		'long',
 		'fecha_solicitud',
-		'fecha_aprobación',
-		'fecha_visita'
+		'fecha_aprobacion',
+		'fecha_visita',
+		'comite_id',
     ];
 }

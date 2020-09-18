@@ -1,5 +1,6 @@
 <?php
 
+use App\Comite;
 use App\Sector;
 use App\TipoPago;
 use App\EstadoServicio;
@@ -16,9 +17,9 @@ class CatalogoSeeder extends Seeder
     {
         EstadoServicio::insert([
             ['nombre' => 'En trámite', 'descripcion' => 'Servicio solicitado','inicia_tramite' => '1'],
-            ['nombre' => 'Vigente','descripcion' => 'Servicio vigente','inicia_tramite' => '0'],
-            ['nombre' => 'Suspendido', 'descripcion' => 'Servicio suspendido','inicia_tramite' => '0'],
-            ['nombre' => 'Revocado', 'descripcion' => 'Servicio revocado','inicia_tramite' => '0']
+            ['nombre' => 'Vigente','descripcion' => 'Servicio vigente','inicia_tramite' => '2'],
+            ['nombre' => 'Suspendido', 'descripcion' => 'Servicio suspendido','inicia_tramite' => '3'],
+            ['nombre' => 'Rechazado', 'descripcion' => 'Servicio rechazado','inicia_tramite' => '4']
         ]);
 
         Sector::insert([
@@ -31,6 +32,13 @@ class CatalogoSeeder extends Seeder
 
         TipoPago::insert([
             'nombre' => 'Canon de agua'
-        ]);    
+        ]);
+        
+        Comite::insert([
+            ['nombres' =>'Selvin','apellidos' =>'Escobar','puesto' =>'Presidente'],
+            ['nombres' =>'Armando','apellidos' =>'Pérez','puesto' =>'Tesorero'],
+            ['nombres' =>'Gabriel','apellidos' =>'Martínez','puesto' =>'Secretario'],
+        ]);
+
     }
 }

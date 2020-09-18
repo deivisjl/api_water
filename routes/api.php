@@ -42,5 +42,14 @@ Route::resource('tipo-pago','Catalogos\TipoPagoController',['except' => ['create
 Route::resource('sectores','Catalogos\SectorController',['except' => ['create','show']]);
 Route::get('sectores-obtener','Catalogos\SectorController@sectores');
 
+Route::resource('comite','Catalogos\ComiteController');
+Route::get('comite-obtener','Catalogos\ComiteController@obtener');
+
 /* Rutas de solicitud */
-Route::resource('solicitudes','Solicitud\SolicitudController',['except' => ['create','show']]); 
+Route::resource('solicitudes','Solicitud\SolicitudController',['except' => ['create','show','destroy']]); 
+Route::post('solicitudes-aprobar','Solicitud\SolicitudController@aprobar');
+Route::post('solicitudes-rechazar','Solicitud\SolicitudController@rechazar');
+
+/* Rutas de servicios */
+Route::resource('servicios','Servicio\ServicioController',['except' => ['create','show','destroy']]); 
+Route::get('servicios-detalle/{id}','Servicio\ServicioController@detalle');

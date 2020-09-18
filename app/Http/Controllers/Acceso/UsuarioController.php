@@ -200,7 +200,7 @@ class UsuarioController extends ApiController
     public function update(Request $request, $id)
     {
         $rules = [
-            'correo_electronico' => 'nullable|email|unique:users',
+            'correo_electronico' => 'nullable|email|unique:users,correo_electronico,'.$id,
             'direccion' => 'required',
             'email' => 'required|numeric|unique:users,email,'.$id,
             'primer_apellido' => 'required',
