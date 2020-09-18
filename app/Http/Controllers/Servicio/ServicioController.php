@@ -73,6 +73,29 @@ class ServicioController extends ApiController
         return response()->json($data, 200);
     }
 
+    /**
+    * @SWG\Get(
+    *     path="/api/servicios-detalle/{id}",
+    *     summary="Mostrar un servicio especifico",
+    *     tags={"Servicios"},
+    *     security={ {"bearer": {} }}, 
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del servicio a mostrar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),       
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar un servicio especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
    public function detalle($id)
    {
        $registro = DB::table('servicio as s')

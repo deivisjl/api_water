@@ -532,6 +532,27 @@
                 ]
             }
         },
+        "/api/usuario-buscar/{criterio}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Buscar un usuario por nombre",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar usuarios seg\u00fan criterio de busqueda."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/usuario-menu": {
             "get": {
                 "tags": [
@@ -541,6 +562,166 @@
                 "responses": {
                     "200": {
                         "description": "Mostrar todos los items del menu."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/comite": {
+            "get": {
+                "tags": [
+                    "Comit\u00e9"
+                ],
+                "summary": "Mostrar registros del comit\u00e9",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los integrantes del comit\u00e9"
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Comit\u00e9"
+                ],
+                "summary": "Guardar integrante de comite",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos del nuevo integrante",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevo integrante."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/comite/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Comit\u00e9"
+                ],
+                "summary": "Obtener un integrante especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del integrante a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtener un integrante especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/comite/{comite}": {
+            "put": {
+                "tags": [
+                    "Comit\u00e9"
+                ],
+                "summary": "Actualizar un integrante especifico",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos del integrante a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un integrante especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/comite/{id}": {
+            "delete": {
+                "tags": [
+                    "Comit\u00e9"
+                ],
+                "summary": "Eliminar un integrante especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del integrante a eliminar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Eliminar un integrante especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/comite-obtener": {
+            "get": {
+                "tags": [
+                    "Comit\u00e9"
+                ],
+                "summary": "Obtener todos los integrantes activos",
+                "responses": {
+                    "200": {
+                        "description": "Obtener todos los integrantes activos."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"
@@ -960,6 +1141,226 @@
                 "responses": {
                     "200": {
                         "description": "Eliminar un tipo de pago especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/servicios": {
+            "get": {
+                "tags": [
+                    "Servicios"
+                ],
+                "summary": "Mostrar servicios",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas los servicios."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/servicios-detalle/{id}": {
+            "get": {
+                "tags": [
+                    "Servicios"
+                ],
+                "summary": "Mostrar un servicio especifico",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del servicio a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un servicio especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/solicitudes": {
+            "get": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Mostrar solicitudes",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todas las solicitudes."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Guardar nuevos solicitudes",
+                "parameters": [
+                    {
+                        "name": "solicitud",
+                        "in": "path",
+                        "description": "Datos de la nueva solicitud",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos solicitudes."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/solicitudes/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Obtener una solicitud especifica",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id de la solicitud a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtener una solicitud especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/solicitudes/{solicitud}": {
+            "put": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Actualizar una solicitud especifica",
+                "parameters": [
+                    {
+                        "name": "Rol",
+                        "in": "path",
+                        "description": "Datos de la solicitud a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actualizar una solicitud especifica."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/solicitudes-aprobar": {
+            "post": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Aprobar solicitudes",
+                "parameters": [
+                    {
+                        "name": "solicitud",
+                        "in": "path",
+                        "description": "Datos de la aprobaci\u00f3n de solicitud",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Aprobar solicitudes."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/solicitudes-rechazar": {
+            "post": {
+                "tags": [
+                    "Solicitudes"
+                ],
+                "summary": "Rechazar solicitudes",
+                "parameters": [
+                    {
+                        "name": "solicitud",
+                        "in": "path",
+                        "description": "Datos del rechazo de solicitud",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rechazar solicitudes."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"
