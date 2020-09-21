@@ -18,7 +18,7 @@ class ServicioController extends ApiController
     *     security={ {"bearer": {} }},        
     *     @SWG\Response(
     *         response=200,
-    *         description="Mostrar todas los servicios."
+    *         description="Mostrar todos los servicios."
     *     ),
     *     @SWG\Response(
     *         response="default",
@@ -28,7 +28,9 @@ class ServicioController extends ApiController
     */
     public function index(Request $request)
     {
-        $columna = $request['sortBy'] ? $request['sortBy'] : "u.primer_nombre";
+        $columna = $request['sortBy'] ? $request['sortBy'] : "s.no_convenio";
+        $columna = $request['sortBy'] == 'dpi' ? "u.email" : $columna;
+        $columna = $request['sortBy'] == 'nombre' ? "u.primer_nombre" : $columna;
         $columna = $request['sortBy'] == 'apellidos' ? "u.primer_apellido" : $columna;
         $columna = $request['sortBy'] == 'sector' ? "se.nombre" : $columna;
         $columna = $request['sortBy'] == 'correo_electronico' ? "u.correo_electronico" : $columna;
@@ -46,7 +48,7 @@ class ServicioController extends ApiController
                 ->join('users as u','s.usuario_id','u.id')
                 ->join('sector as se','s.sector_id','se.id')
                 ->join('estado_servicio as es','s.estado_servicio_id','es.id')
-                ->select('s.id',DB::raw('CONCAT_WS(" ",u.primer_nombre,"",u.segundo_nombre,"",u.tercer_nombre) as nombres'),DB::raw('CONCAT_WS(" ",u.primer_apellido,"",u.segundo_apellido) as apellidos'),'se.nombre as sector','u.correo_electronico','es.nombre as estado')
+                ->select('s.id',DB::raw('CONCAT_WS(" ",u.primer_nombre,"",u.segundo_nombre,"",u.tercer_nombre) as nombres'),DB::raw('CONCAT_WS(" ",u.primer_apellido,"",u.segundo_apellido) as apellidos'),'se.nombre as sector','u.correo_electronico','es.nombre as estado','u.email as dpi','s.no_convenio')
                 ->whereNull('s.deleted_at') 
                 ->whereIn('s.estado_servicio_id',[2,3])
                 ->where($columna, 'LIKE', '%' . $criterio . '%')
@@ -107,5 +109,40 @@ class ServicioController extends ApiController
                     ->first();
         
         return response()->json(['data' => $registro]);
+   }
+
+   /**
+    * @SWG\Get(
+    *     path="/api/servicios-usuario/{id}",
+    *     summary="Mostrar los servicios de un usuario",
+    *     tags={"Servicios"},
+    *     security={ {"bearer": {} }}, 
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del usuario de los servicios a mostrar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),       
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar los servicios de un usuario."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+   public function serviciosUsuario($id)
+   {
+        $registros = DB::table('servicio as s')
+                        ->join('users as u','s.usuario_id','u.id')
+                        ->select('s.id','s.no_convenio',DB::raw('CONCAT_WS(" ",u.primer_nombre,"",u.segundo_nombre,"",u.tercer_nombre,"",u.primer_apellido,"",u.segundo_apellido) as nombre'))
+                        ->where('s.usuario_id',$id)
+                        ->whereIn('s.estado_servicio_id',[2,3])
+                        ->get();
+
+        return $this->showAll(collect($registros));
    }
 }

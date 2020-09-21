@@ -26,5 +26,6 @@ class Servicio extends Model
 		'fecha_aprobacion',
 		'fecha_visita',
 		'comite_id',
+		'no_convenio',
     ];
 }

@@ -68,6 +68,29 @@ class UsuarioController extends ApiController
         return response()->json($data, 200);
     }
 
+    /**
+    * @SWG\Get(
+    *     path="/api/usuarios/show",
+    *     summary="Listar un usuario",
+    *     tags={"Usuarios"},
+    *     security={ {"bearer": {} }}, 
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del usuario a mostrar",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),       
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar un usuario."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function show($id)
     {
         $registros = DB::table('users') 

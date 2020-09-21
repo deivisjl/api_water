@@ -21,6 +21,7 @@ class CreateServiciosTable extends Migration
             $table->bigInteger('estado_servicio_id')->unsigned();
             $table->text('direccion');
             $table->text('referencia_direccion')->nullable();
+            $table->string('no_convenio')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
             $table->date('fecha_solicitud');

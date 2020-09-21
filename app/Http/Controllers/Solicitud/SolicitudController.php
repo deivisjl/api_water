@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Solicitud;
 
 use App\Rechazo;
 use App\Servicio;
+use Carbon\Carbon;
 use App\EstadoServicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -230,7 +231,10 @@ class SolicitudController extends ApiController
 
         $estado = EstadoServicio::where('inicia_tramite',2)->first();
 
+        $fecha = Carbon::now()->format('Y');
+
         $solicitud = Servicio::findOrFail($request->id);
+        $solicitud->no_convenio = $solicitud->id.$fecha;
         $solicitud->fecha_aprobacion = $request->get('fecha_visita');
         $solicitud->fecha_visita = $request->get('fecha_visita');
         $solicitud->comite_id = $request->get('persona_id');

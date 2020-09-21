@@ -39,7 +39,7 @@ class TipoPagoController extends ApiController
         $pagina = $request['page'];
 
         $tipo_pago = DB::table('tipo_pago') 
-                ->select('id','nombre','descripcion') 
+                ->select('id','nombre','descripcion','monto') 
                 ->where($columna, 'LIKE', '%' . $criterio . '%')
                 ->orderBy($columna, $orden)
                 ->skip($pagina)
@@ -85,6 +85,7 @@ class TipoPagoController extends ApiController
     {
         $rules = [
                 'nombre' => 'required|string',
+                'monto' => 'required|numeric|min:1',
                 'descripcion' => 'required|string'
             ];
 
@@ -92,6 +93,7 @@ class TipoPagoController extends ApiController
 
         $tipo = new TipoPago();
         $tipo->nombre = $request->nombre;
+        $tipo->monto = $request->monto;
         $tipo->descripcion = $request->descripcion;
         $tipo->save();
 
@@ -154,12 +156,14 @@ class TipoPagoController extends ApiController
     {
         $rules = [
                 'nombre' => 'required|string',
+                'monto' => 'required|numeric|min:1',
                 'descripcion' => 'required|string'
             ];
 
         $this->validate($request, $rules);
         
         $tipo_pago->nombre = $request->nombre;
+        $tipo_pago->monto = $request->monto;
         $tipo_pago->descripcion = $request->descripcion;
         if(!$tipo_pago->isDirty())
             return $this->errorResponse('Se debe especificar al menos un valor distinto para actualizar',423);
@@ -199,5 +203,28 @@ class TipoPagoController extends ApiController
         $tipo_pago->delete();
 
         return $this->showOne($accion,201);
+    }
+
+    /**
+    * @SWG\Get(
+    *     path="/api/tipo-pago-obtener",
+    *     summary="Mostrar registros de los tipos de pagos",
+    *     tags={"Tipo Pago"},
+    *     security={ {"bearer": {} }},    
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar todos los tipos de pagos."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function obtener()
+    {
+        $registros = TipoPago::all();
+
+        return $this->showAll($registros);
     }
 }

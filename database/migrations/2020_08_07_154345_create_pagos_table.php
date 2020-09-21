@@ -15,12 +15,12 @@ class CreatePagosTable extends Migration
     {
         Schema::create('pago', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('mes_id')->unsigned();
+            $table->bigInteger('mes_id')->nullable()->unsigned();
             $table->bigInteger('servicio_id')->unsigned();
             $table->bigInteger('tipo_pago_id')->unsigned();
             $table->decimal('monto');
-            $table->string('no_boleta');
-            $table->string('year');
+            $table->string('no_boleta')->nullable();
+            $table->integer('anio_id')->unsigned();
             $table->foreign('mes_id')->references('id')->on('mes');
             $table->foreign('servicio_id')->references('id')->on('servicio');
             $table->foreign('tipo_pago_id')->references('id')->on('tipo_pago');

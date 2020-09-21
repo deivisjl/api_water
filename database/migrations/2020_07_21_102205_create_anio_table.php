@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoPagosTable extends Migration
+class CreateAnioTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateTipoPagosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_pago', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->decimal('monto');
-            $table->integer('unico')->default(1);
-            $table->text('descripcion')->nullable();
+        Schema::create('anio', function (Blueprint $table) {
+            $table->integer('id')->primary()->index();
+            $table->integer('nombre');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateTipoPagosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_pago');
+        Schema::dropIfExists('anio');
     }
 }

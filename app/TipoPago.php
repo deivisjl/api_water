@@ -9,6 +9,6 @@ class TipoPago extends Model
     protected $table = 'tipo_pago';
 
     protected $fillable = [
-        'id', 'nombre', 'descripcion',
+        'id', 'nombre', 'monto','descripcion','unico'
     ];
 }
