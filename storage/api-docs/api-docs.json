@@ -402,6 +402,36 @@
                 ]
             }
         },
+        "/api/usuarios/show": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Listar un usuario",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del usuario a mostrar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un usuario."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/usuarios/{id}/edit": {
             "get": {
                 "tags": [
@@ -562,6 +592,27 @@
                 "responses": {
                     "200": {
                         "description": "Mostrar todos los items del menu."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/anios": {
+            "get": {
+                "tags": [
+                    "A\u00f1os"
+                ],
+                "summary": "Mostrar los registros de a\u00f1os",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos a\u00f1os"
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"
@@ -875,6 +926,27 @@
                 ]
             }
         },
+        "/api/meses": {
+            "get": {
+                "tags": [
+                    "Meses"
+                ],
+                "summary": "Mostrar todos los registros de meses",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los registros de meses"
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/sectores": {
             "get": {
                 "tags": [
@@ -1153,6 +1225,78 @@
                 ]
             }
         },
+        "/api/tipo-pago-obtener": {
+            "get": {
+                "tags": [
+                    "Tipo Pago"
+                ],
+                "summary": "Mostrar registros de los tipos de pagos",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los tipos de pagos."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/pagos": {
+            "post": {
+                "tags": [
+                    "Pagos"
+                ],
+                "summary": "Guardar nuevos pagos",
+                "parameters": [
+                    {
+                        "name": "pago",
+                        "in": "path",
+                        "description": "Datos del nuevo pago",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nuevos pagos."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/pagos-detalle": {
+            "get": {
+                "tags": [
+                    "Pagos"
+                ],
+                "summary": "Mostrar los pagos del servicio",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los pagos del servicio."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/servicios": {
             "get": {
                 "tags": [
@@ -1161,7 +1305,7 @@
                 "summary": "Mostrar servicios",
                 "responses": {
                     "200": {
-                        "description": "Mostrar todas los servicios."
+                        "description": "Mostrar todos los servicios."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"
@@ -1192,6 +1336,66 @@
                 "responses": {
                     "200": {
                         "description": "Mostrar un servicio especifico."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/servicios-usuario/{id}": {
+            "get": {
+                "tags": [
+                    "Servicios"
+                ],
+                "summary": "Mostrar los servicios de un usuario",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del usuario de los servicios a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar los servicios de un usuario."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/servicio-titular/{id}": {
+            "get": {
+                "tags": [
+                    "Servicios"
+                ],
+                "summary": "Mostrar el titular del servicio",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del servicio",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar el titular del servicio."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"

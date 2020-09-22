@@ -145,4 +145,38 @@ class ServicioController extends ApiController
 
         return $this->showAll(collect($registros));
    }
+   /**
+    * @SWG\Get(
+    *     path="/api/servicio-titular/{id}",
+    *     summary="Mostrar el titular del servicio",
+    *     tags={"Servicios"},
+    *     security={ {"bearer": {} }}, 
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del servicio",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),       
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar el titular del servicio."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+   public function obtenerUsuarioTitular($id)
+    {
+        $registro = DB::table('pago as p')
+                        ->join('servicio as s','p.servicio_id','s.id')
+                        ->join('users as u','s.usuario_id','u.id')
+                        ->select(DB::raw('CONCAT_WS(" ",u.primer_nombre,"",u.segundo_nombre,"",u.tercer_nombre,"",u.primer_apellido,"",u.segundo_apellido) as nombre'))
+                        ->where('s.id',$id)
+                        ->first();
+
+        return response()->json(['data' => $registro]);
+    }
 }

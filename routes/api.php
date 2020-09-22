@@ -58,7 +58,9 @@ Route::post('solicitudes-rechazar','Solicitud\SolicitudController@rechazar');
 /* Rutas de servicios */
 Route::resource('servicios','Servicio\ServicioController',['except' => ['create','show','destroy']]); 
 Route::get('servicios-detalle/{id}','Servicio\ServicioController@detalle');
-Route::get('servicios-usuario/{id}','Servicio\ServicioController@serviciosUsuario')
+Route::get('servicios-usuario/{id}','Servicio\ServicioController@serviciosUsuario');
+Route::get('servicio-titular/{id}','Servicio\ServicioController@obtenerUsuarioTitular');
 
 /* Rutas de pagos */ ;
 Route::post('pagos','Pago\PagoController@pagar');
+Route::get('pagos-detalle','Pago\PagoController@detalle');

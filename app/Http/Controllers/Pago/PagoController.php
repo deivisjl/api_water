@@ -63,6 +63,66 @@ class PagoController extends ApiController
         return $this->showOne($registro);
     }
 
+    /**
+    * @SWG\Get(
+    *     path="/api/pagos-detalle",
+    *     summary="Mostrar los pagos del servicio",
+    *     tags={"Pagos"},
+    *     security={ {"bearer": {} }},    
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar todos los pagos del servicio."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function detalle(Request $request)
+    {
+        $columna = $request['sortBy'] ? $request['sortBy'] : "s.no_convenio";
+        $columna = $request['sortBy'] == 'mes' ? "m.nombre" : $columna;
+        $columna = $request['sortBy'] == 'anio' ? "p.anio_id" : $columna;
+        $columna = $request['sortBy'] == 'monto' ? "p.monto" : $columna;
+        $columna = $request['sortBy'] == 'tipo_pago' ? "tp.nombre" : $columna;
+
+        $criterio = $request['search'];
+
+        $orden = $request['sortDesc'] ? 'desc' : 'asc';
+
+        $filas = $request['perPage'];
+
+        $pagina = $request['page'];
+
+        $registros = DB::table('pago as p')
+                        ->join('servicio as s','p.servicio_id','s.id')
+                        ->leftJoin('mes as m','p.mes_id','m.id')
+                        ->leftJoin('tipo_pago as tp','p.tipo_pago_id','tp.id')
+                        ->select('p.id','s.no_convenio','m.nombre as mes','p.anio_id as anio','p.monto','tp.nombre as tipo_pago')
+                        ->where('p.servicio_id',$request->get('pago'))
+                        ->where($columna, 'LIKE', '%' . $criterio . '%')
+                        ->orderBy($columna, $orden)
+                        ->skip($pagina)
+                        ->take($filas)
+                        ->get();
+
+        $count = DB::table('pago as p')
+                    ->join('servicio as s','p.servicio_id','s.id')
+                    ->leftJoin('mes as m','p.mes_id','m.id')
+                    ->leftJoin('tipo_pago as tp','p.tipo_pago_id','tp.id')
+                    ->where('p.servicio_id',$request->get('pago'))
+                    ->where($columna, 'LIKE', '%' . $criterio . '%')
+                    ->count();
+               
+        $data = array(
+            'total' => $count,
+            'data' => $registros,
+        );
+
+        return response()->json($data, 200);
+    }
+    
     private function comprobarPago($request)
     {
         $verificar = DB::table('pago')
