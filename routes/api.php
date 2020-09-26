@@ -60,6 +60,7 @@ Route::resource('servicios','Servicio\ServicioController',['except' => ['create'
 Route::get('servicios-detalle/{id}','Servicio\ServicioController@detalle');
 Route::get('servicios-usuario/{id}','Servicio\ServicioController@serviciosUsuario');
 Route::get('servicio-titular/{id}','Servicio\ServicioController@obtenerUsuarioTitular');
+Route::get('servicio-titular-detalle/{id}','Servicio\ServicioController@obtenerUsuarioTitularDetalle');
 
 /* Rutas de pagos */ ;
 Route::post('pagos','Pago\PagoController@pagar');

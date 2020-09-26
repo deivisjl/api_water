@@ -139,7 +139,7 @@ class ServicioController extends ApiController
         $registros = DB::table('servicio as s')
                         ->join('users as u','s.usuario_id','u.id')
                         ->select('s.id','s.no_convenio',DB::raw('CONCAT_WS(" ",u.primer_nombre,"",u.segundo_nombre,"",u.tercer_nombre,"",u.primer_apellido,"",u.segundo_apellido) as nombre'))
-                        ->where('s.usuario_id',$id)
+                        ->where('s.id',$id)
                         ->whereIn('s.estado_servicio_id',[2,3])
                         ->get();
 
@@ -176,6 +176,40 @@ class ServicioController extends ApiController
                         ->select(DB::raw('CONCAT_WS(" ",u.primer_nombre,"",u.segundo_nombre,"",u.tercer_nombre,"",u.primer_apellido,"",u.segundo_apellido) as nombre'))
                         ->where('s.id',$id)
                         ->first();
+
+        return response()->json(['data' => $registro]);
+    }
+
+    /**
+    * @SWG\Get(
+    *     path="/api/servicio-titular-detalle/{id}",
+    *     summary="Mostrar el titular del servicio con detalle",
+    *     tags={"Servicios"},
+    *     security={ {"bearer": {} }}, 
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del servicio",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),       
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar el titular del servicio con detalle."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function obtenerUsuarioTitularDetalle($id)
+    {
+        $registro = DB::table('servicio as s')
+                    ->join('users as u','s.usuario_id','u.id')
+                    ->select('s.id','s.no_convenio',DB::raw('CONCAT_WS(" ",u.primer_nombre,"",u.segundo_nombre,"",u.tercer_nombre,"",u.primer_apellido,"",u.segundo_apellido) as nombre'))
+                    ->where('s.id',$id)
+                    ->first();
 
         return response()->json(['data' => $registro]);
     }

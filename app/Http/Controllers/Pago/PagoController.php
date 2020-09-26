@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pago;
 
 use App\Pago;
+use App\TipoPago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -47,7 +48,12 @@ class PagoController extends ApiController
 
         $this->validate($request, $rules);
 
-        if($this->comprobarPago($request))
+        if($this->comprobarPagoUnico($request))
+        {
+            return $this->errorResponse('Este pago ya existe en los registros',423);
+        }
+
+        if($this->comprobarPagoMensual($request))
         {
             return $this->errorResponse('Este pago ya existe en los registros',423);
         }
@@ -123,7 +129,7 @@ class PagoController extends ApiController
         return response()->json($data, 200);
     }
     
-    private function comprobarPago($request)
+    private function comprobarPagoMensual($request)
     {
         $verificar = DB::table('pago')
                         ->select('id')
@@ -134,5 +140,26 @@ class PagoController extends ApiController
                         ->first();
 
         return $verificar ? true : false;
+    }
+
+    public function comprobarPagoUnico($request)
+    {
+        $tipo = TipoPago::where('unico',1)->where('id',$request->tipo_pago)->first();
+
+        if($tipo)
+        {
+            $verificar = DB::table('pago')
+                        ->select('id')
+                        ->where('servicio_id',$request->servicio)
+                        ->where('tipo_pago_id',$tipo->id)
+                        ->first();    
+
+            return $verificar ? true : false;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 }
