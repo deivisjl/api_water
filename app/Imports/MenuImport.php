@@ -46,6 +46,7 @@ class MenuImport implements ToCollection
     {
     	$admin = 'Administrador';
     	$digitador = 'Digitador';
+        $regular = 'Regular';
 
     	foreach ($this->permisos as $value) 
     	{
@@ -58,6 +59,9 @@ class MenuImport implements ToCollection
     				case $digitador:
     					$this->permiso_rol($digitador,$value[0]);
     				break;
+                    case $regular:
+                        $this->permiso_rol($regular,$value[0]);
+                    break;
     				default:
     				break;
     		}

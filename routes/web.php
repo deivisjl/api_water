@@ -25,3 +25,5 @@ Route::get('/authorized-clients', 'HomeController@authorizedClients')->name('aut
 Route::group(['middleware' => ['preventBackHistory']], function(){
 	Route::post('logout', 'Auth\LoginController@logout')->name('logout');	
 });
+
+Route::get('pdf','PruebaPdfController@index');

@@ -50,6 +50,9 @@ Route::get('comite-obtener','Catalogos\ComiteController@obtener');
 Route::get('meses','Catalogos\MesController@index');
 Route::get('anios','Catalogos\AnioController@index');
 
+Route::resource('autorizaciones','Catalogos\AutorizacionController',['except' => ['create','show','destroy']]);
+Route::get('autorizaciones-habilitar/{id}','Catalogos\AutorizacionController@habilitar');
+
 /* Rutas de solicitud */
 Route::resource('solicitudes','Solicitud\SolicitudController',['except' => ['create','show','destroy']]); 
 Route::post('solicitudes-aprobar','Solicitud\SolicitudController@aprobar');
@@ -65,3 +68,7 @@ Route::get('servicio-titular-detalle/{id}','Servicio\ServicioController@obtenerU
 /* Rutas de pagos */ ;
 Route::post('pagos','Pago\PagoController@pagar');
 Route::get('pagos-detalle','Pago\PagoController@detalle');
+
+/* Rutas de mi servicio */ 
+Route::get('mis-servicios','MiServicio\MiServicioController@index');
+Route::get('mis-servicios-detalle','MiServicio\MiServicioController@detalle');

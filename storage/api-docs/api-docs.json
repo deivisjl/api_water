@@ -625,6 +625,145 @@
                 ]
             }
         },
+        "/api/autorizaciones": {
+            "get": {
+                "tags": [
+                    "Autorizaciones"
+                ],
+                "summary": "Mostrar registros de las autorizaciones",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos las autorizaciones de comit\u00e9"
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Autorizaciones"
+                ],
+                "summary": "Guardar nuevo registro de autorizaci\u00f3n",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos de la nueva autorizaci\u00f3n",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Guardar nueva autorizaci\u00f3n."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/autorizaciones/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Autorizaciones"
+                ],
+                "summary": "Obtener una autorizaci\u00f3n especifica",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id de la autorizaci\u00f3n a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtener un autorizaci\u00f3n especifica."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/autorizaciones/{autorizacion}": {
+            "put": {
+                "tags": [
+                    "Autorizaciones"
+                ],
+                "summary": "Actualizar una autorizaci\u00f3n especifica",
+                "parameters": [
+                    {
+                        "name": "Registro",
+                        "in": "path",
+                        "description": "Datos de la autorizaci\u00f3n a actualizar",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Actualizar un autorizaci\u00f3n especifica."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/autorizaciones-habiltar/{id}": {
+            "get": {
+                "tags": [
+                    "Autorizaciones"
+                ],
+                "summary": "Habilitar una autorizaci\u00f3n especifica",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id de la autorizaci\u00f3n a mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registro de autorizaci\u00f3n habilitada."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/comite": {
             "get": {
                 "tags": [
@@ -1246,6 +1385,57 @@
                 ]
             }
         },
+        "/api/mis-servicios": {
+            "get": {
+                "tags": [
+                    "Mis servicios"
+                ],
+                "summary": "Mostrar los servicios asociados al usuario en sesion",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los servicios del usuario"
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/mis-servicios-detalle/{request}": {
+            "get": {
+                "tags": [
+                    "Mis servicios"
+                ],
+                "summary": "Listar los pagos del servicio",
+                "parameters": [
+                    {
+                        "name": "request",
+                        "in": "path",
+                        "description": "Petici\u00f3n con las opciones para mostrar",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Obtener el detalle de los pagos."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/pagos": {
             "post": {
                 "tags": [
@@ -1396,6 +1586,36 @@
                 "responses": {
                     "200": {
                         "description": "Mostrar el titular del servicio."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/servicio-titular-detalle/{id}": {
+            "get": {
+                "tags": [
+                    "Servicios"
+                ],
+                "summary": "Mostrar el titular del servicio con detalle",
+                "parameters": [
+                    {
+                        "name": "Id",
+                        "in": "path",
+                        "description": "Id del servicio",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostrar el titular del servicio con detalle."
                     },
                     "default": {
                         "description": "Falla inesperada. Intente luego"

@@ -5,6 +5,7 @@ use App\Anio;
 use App\Comite;
 use App\Sector;
 use App\TipoPago;
+use App\Autorizacion;
 use App\EstadoServicio;
 use Illuminate\Database\Seeder;
 
@@ -68,5 +69,13 @@ class CatalogoSeeder extends Seeder
             ['id' => '2026','nombre' => '2026'],
         ]);
 
+        Autorizacion::create([
+            'nombre_comite' => 'Comité de Agua Potable, Aldea Platanares',
+            'municipio_departamento' => 'Guazacapán, Santa Rosa',
+            'autorizacion' => '40-2014KNZM',
+            'registro_contraloria' => '06-09-09 F170 L04',
+            'fecha' => '2017/02/15',
+            'activo' => 1
+        ]);
     }
 }

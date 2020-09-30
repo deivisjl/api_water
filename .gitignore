@@ -14,3 +14,7 @@ yarn-error.log
 /storage/api-docs/api-docs.json
 composer.lock
 yarn.lock
+
+/app/Http/Controllers/PruebaPdfController.php
+/resources/views/boleta2.blade.php
+/resources/views/recibo2.blade.php

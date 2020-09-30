@@ -21,5 +21,10 @@ class RolSeeder extends Seeder
             'nombre' => 'Digitador',
             'descripcion' => 'Se encarga de registrar la información'
         ]);
+
+        Rol::create([
+            'nombre' => 'Regular',
+            'descripcion' => 'Puede consultar sus servicios'
+        ]);
     }
 }

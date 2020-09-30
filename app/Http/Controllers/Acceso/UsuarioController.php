@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Acceso;
 
 use App\User;
 use App\Telefono;
+use Carbon\Carbon;
 use App\UsuarioRol;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -142,6 +144,7 @@ class UsuarioController extends ApiController
 
         return DB::transaction(function() use($request){
 
+            $password = $this->crearCredencial();
             $usuario = new User();
             $usuario->correo_electronico = $request->get('correo_electronico');
             $usuario->direccion_residencia = $request->get('direccion');
@@ -151,7 +154,7 @@ class UsuarioController extends ApiController
             $usuario->segundo_apellido = $request->get('segundo_apellido');
             $usuario->segundo_nombre = $request->get('segundo_nombre');
             $usuario->tercer_nombre = $request->get('tercer_nombre');
-            $usuario->password = bcrypt($this->crearCredencial());
+            $usuario->password = bcrypt($password);
             $usuario->save();
 
             $telefono = new Telefono();
@@ -159,7 +162,15 @@ class UsuarioController extends ApiController
             $telefono->numero =  $request->get('telefono');
             $telefono->save();
 
-            return $this->showMessage('Registro generado con éxito', 200);
+            $fecha = Carbon::now()->format('dmY_h:m:s');
+
+            $datos = ['pass' => $password, 'usuario' => $usuario, 'fecha' => $fecha];
+
+            $boleta = \PDF::loadView('boleta',['datos' => $datos])->setPaper('half-letter','portrait');
+            
+            $fecha = Carbon::now()->format('dmY_h:m:s');
+
+            return $boleta->stream('boleta_'.$usuario->primer_nombre.'_'.$fecha.'.pdf');
         });
 
     }
