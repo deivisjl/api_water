@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Pago;
 
 use App\Pago;
 use App\TipoPago;
+use Carbon\Carbon;
+use App\Autorizacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Traits\ConvertirNumerosLetras;
 use App\Http\Controllers\ApiController;
 
 class PagoController extends ApiController
 {
+    use ConvertirNumerosLetras;
     /**
     * @SWG\Post(
     *     path="/api/pagos",
@@ -58,15 +62,27 @@ class PagoController extends ApiController
             return $this->errorResponse('Este pago ya existe en los registros',423);
         }
 
-        $registro = new Pago();
-        $registro->anio_id = $request->anio;
-        $registro->mes_id = $request->mes;
-        $registro->monto = $request->monto;
-        $registro->servicio_id = $request->servicio;
-        $registro->tipo_pago_id = $request->tipo_pago;
-        $registro->save();
+        return DB::transaction(function() use($request){
 
-        return $this->showOne($registro);
+            $registro = new Pago();
+            $registro->anio_id = $request->anio;
+            $registro->mes_id = $request->mes;
+            $registro->monto = $request->monto;
+            $registro->servicio_id = $request->servicio;
+            $registro->tipo_pago_id = $request->tipo_pago;
+            $registro->save();
+
+            $comite = Autorizacion::where('activo',1)->first();
+
+            $letras = $this->toMoney($registro->monto,2,'Quetzales','Centavos');
+
+            $fecha = Carbon::now()->format('dmY_h:m:s');
+
+            $boleta = \PDF::loadView('recibo',['registro' => $registro, 'comite' => $comite, 'letras' => $letras, 'fecha' => Carbon::now()->format('d-m-Y')])->setPaper('half-letter','portrait');
+            
+            return $boleta->download('recibo_'.$fecha.'.pdf');
+
+        });
     }
 
     /**

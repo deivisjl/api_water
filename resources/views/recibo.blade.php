@@ -84,47 +84,56 @@
 	<!--  -->
 	<table class="table">
 		<tr class="text-center">
-			<td>Comité de Agua Potable, Aldea Platanares</td>
+			<td>{{ $comite->nombre_comite }}</td>
 		</tr>
 		<tr class="text-center">
-			<td>Guazacapán, Santa Rosa</td>
+			<td>{{ $comite->municipio_departamento }}</td>
 		</tr>
 	</table>
 	<table class="table">
 		<tr style="border-spacing: 10px 5px;">
 			<th width="10%" class="titulo">FECHA:</th>
-			<td width="30%" style="text-align:left;">28-09-2020</td>
+			<td width="30%" style="text-align:left;">{{ $fecha }}</td>
 			<th width="50%" class="titulo" style="text-align: right">INGRESO POR Q.:</th>
-			<td style="text-align:right;">108.00</td>
+			<td style="text-align:left;">{{ $registro->monto }}</td>
 		</tr>
 		<tr>
 			<th width="10%" class="titulo">RECIBI DE:</th>
-			<td colspan="3" style="text-align:left;">Juan Francisco Yelmo Morales</td>
+			<td colspan="3" style="text-align:left;">
+				{{ $registro->servicio->usuario->primer_nombre }} {{ $registro->servicio->usuario->segundo_nombre }} {{ $registro->servicio->usuario->tecer_nombre }} {{ $registro->servicio->usuario->primer_apellido }} {{ $registro->servicio->usuario->segundo_apellido }}
+			</td>
 		</tr>
 		<tr>
 			<th class="titulo" style="font-size: 10px;">LA CANTIDAD DE:</th>
-			<td colspan="3"> Ciento Ocho Quetzales exactos</td>
+			<td colspan="3"> {{ $letras }}</td>
 		</tr>
 		<tr>
 			<th width="8%" class="titulo">CONTRIBUCION:</th>
-			<td colspan="3" style="text-align:left;">Pago de servicio de agua</td>
+			<td colspan="3" style="text-align:left;">
+				{{ $registro->tipo_pago->nombre }}
+			</td>
 		</tr>
 		<tr>
 			<th width="8%" class="titulo">MES Y AÑO:</th>
-			<td colspan="3" style="text-align:left;">Septiembre, 2020</td>
+			<td colspan="3" style="text-align:left;">
+				@if($registro->mes)
+					{{ $registro->mes->nombre }}
+				@endif
+				{{ $registro->anio_id }}
+			</td>
 		</tr>
 		<tr>
 			<th width="100%" colspan="3" class="titulo">AUTORIZACION DE GOBERNACION DEPARTAMENTAL No:</th>
-			<td><small>40-2014KNZM</small></td>
+			<td><small>{{ $comite->autorizacion }}</small></td>
 		</tr>
 		<tr>
 			<th width="10%" class="titulo">DE FECHA:</th>
-			<td width="10%" style="text-align: left;">15/02/2017</td>
+			<td width="10%" style="text-align: left;">{{ Carbon\Carbon::parse($comite->fecha)->format('d-m-Y') }}</td>
 			<th width="80%" colspan="2" class="titulo" style="text-align: right;">No. CUENTANDANCIA O REGISTRO</td>
 		</tr>
 		<tr>
 			<th colspan="3" class="titulo">DE LA CONTRALORIA GENERAL DE CUENTAS:</th>
-			<td colspan="1"><small style="font-size: 12px;">06-09-09 F170 L04</small></td>
+			<td colspan="1"><small style="font-size: 12px;">{{ $comite->registro_contraloria }}</small></td>
 		</tr>
 	</table>
 	<div style="height: 40px;"></div>

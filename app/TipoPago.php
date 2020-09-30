@@ -11,4 +11,9 @@ class TipoPago extends Model
     protected $fillable = [
         'id', 'nombre', 'monto','descripcion','unico'
     ];
+
+    public function pago()
+    {
+    	return $this->hasMany('App\Pago');
+    }
 }

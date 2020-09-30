@@ -28,4 +28,9 @@ class Servicio extends Model
 		'comite_id',
 		'no_convenio',
     ];
+
+    public function usuario()
+    {
+    	return $this->belongsTo('App\User','usuario_id');
+    }
 }

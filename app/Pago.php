@@ -18,4 +18,18 @@ class Pago extends Model
 			'anio_id'
     ];
 
+    public function mes()
+    {
+    	return $this->belongsTo('App\Mes');
+    }
+
+    public function servicio()
+    {
+    	return $this->belongsTo('App\Servicio');
+    }
+
+    public function tipo_pago()
+    {
+    	return $this->belongsTo('App\TipoPago');
+    }
 }

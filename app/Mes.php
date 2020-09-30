@@ -11,4 +11,9 @@ class Mes extends Model
     protected $fillable = [
         'id', 'nombre'
     ];
+
+    public function pago()
+    {
+    	return $this->hasMany(Pago::class);
+    }
 }

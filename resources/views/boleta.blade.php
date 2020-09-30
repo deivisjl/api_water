@@ -6,13 +6,17 @@
 	<title>Boleta de registro</title>
 </head>
 <body>
-	<table>
-		<tbody style="width: 100%">
+	<table style="width: 100%">
+		<tbody>
 			<tr>
 				<td>
 					<img src="{{ asset('img/logo-oficial.png') }}" alt="" style="height: 70px; display: block; margin: auto;">
 				</td>				
 			</tr>
+		</tbody>
+	</table>
+	<table style="width: 100%">
+		<tbody>
 			<tr>
 				<th colspan="2" style="text-align:center; color: #1565C0;">SISCAP</th>
 			</tr>
