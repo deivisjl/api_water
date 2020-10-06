@@ -37,6 +37,7 @@ class UsuarioRolController extends ApiController
                     ->join('permiso as p','p.id','pr.permiso_id')
                     ->select('p.id','p.menu_titulo_id','p.titulo','p.icono','p.ruta_cliente','p.visibilidad','p.orden')
                     ->where('ur.usuario_id','=', $user->id)
+                    ->orderBy('p.orden','asc')
                     ->get();
 
 

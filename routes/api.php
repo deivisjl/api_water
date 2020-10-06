@@ -72,3 +72,8 @@ Route::get('pagos-detalle','Pago\PagoController@detalle');
 /* Rutas de mi servicio */ 
 Route::get('mis-servicios','MiServicio\MiServicioController@index');
 Route::get('mis-servicios-detalle','MiServicio\MiServicioController@detalle');
+
+/* Rutas reportes*/
+Route::post('grafica-recaudacion-general','Reporte\ReporteController@graficaRecaudacionGeneral');
+Route::post('grafica-solicitud-servicio','Reporte\ReporteController@graficaSolicitudServicio');
+Route::post('grafica-recaudacion-tipo','Reporte\ReporteController@graficaRecaudacionTipoServicio');
