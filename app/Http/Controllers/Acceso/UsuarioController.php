@@ -203,6 +203,7 @@ class UsuarioController extends ApiController
         $registro = DB::table('users as u')
                     ->leftJoin('telefono as t','t.usuario_id','u.id')
                     ->select('u.primer_nombre','u.segundo_nombre','u.tercer_nombre','u.primer_apellido','u.segundo_apellido','u.direccion_residencia','u.email','u.correo_electronico','t.numero as telefono')
+                    ->where('u.id',$id)
                     ->first();
 
         return response()->json(['data' => $registro],200);
