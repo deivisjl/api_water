@@ -199,4 +199,11 @@ class EstadoServicioController extends ApiController
         return $this->showOne($accion,201);
 
     }
+
+    public function obtener_estados_editar()
+    {
+        $registros = EstadoServicio::whereNotIn('id',[EstadoServicio::TRAMITE, EstadoServicio::RECHAZADO])->get();
+
+        return $this->showAll(collect($registros));
+    }
 }

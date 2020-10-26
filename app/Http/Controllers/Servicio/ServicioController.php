@@ -74,6 +74,35 @@ class ServicioController extends ApiController
 
         return response()->json($data, 200);
     }
+    /**
+    * @SWG\Get(
+    *     path="/api/servicios/{id}",
+    *     summary="Mostrar la información asociada a un servicio",
+    *     tags={"Servicios"},
+    *     security={ {"bearer": {} }}, 
+    *      @SWG\Parameter(
+    *          name="Id",
+    *          description="Id del servicio a mostrar",
+    *          required=true,
+    *          in="path",
+    *          type="integer"    
+    *      ),       
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Mostrar la información asociada a un servicio."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+    public function show($id)
+    {
+        $registro = Servicio::findOrFail($id);
+
+        return $this->showOne($registro, 200);
+    }
 
     /**
     * @SWG\Get(
@@ -110,6 +139,43 @@ class ServicioController extends ApiController
         
         return response()->json(['data' => $registro]);
    }
+   /**
+    * @SWG\PUT(
+    *     path="/api/servicios/{estado}",
+    *     summary="Actualizar el estado de un servicio especifico",
+    *     tags={"Servicios"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Registro",
+    *          description="Estado del servicio a actualizar",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Actualizar el estado de un servicio especifico."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
+   public function update(Request $request, $id)
+    {
+        $rules = [
+                'estado' => 'required|numeric',
+            ];
+
+        $this->validate($request, $rules);
+
+        $servicio = Servicio::findOrFail($id);
+        $servicio->estado_servicio_id = $request->get('estado');
+        $servicio->save();
+
+        return $this->showOne($servicio);
+    }
 
    /**
     * @SWG\Get(

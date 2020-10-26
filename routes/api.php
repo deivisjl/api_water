@@ -38,6 +38,8 @@ Route::post('usuarios-roles','Acceso\UsuarioController@updateRoles');
 
 /* Rutas de catalogos */
 Route::resource('estado-servicio','Catalogos\EstadoServicioController',['except' => ['create','show']]);
+Route::get('estado-servicio-editar','Catalogos\EstadoServicioController@obtener_estados_editar');
+
 Route::resource('tipo-pago','Catalogos\TipoPagoController',['except' => ['create','show']]);
 Route::get('tipo-pago-obtener','Catalogos\TipoPagoController@obtener');
 
@@ -59,7 +61,7 @@ Route::post('solicitudes-aprobar','Solicitud\SolicitudController@aprobar');
 Route::post('solicitudes-rechazar','Solicitud\SolicitudController@rechazar');
 
 /* Rutas de servicios */
-Route::resource('servicios','Servicio\ServicioController',['except' => ['create','show','destroy']]); 
+Route::resource('servicios','Servicio\ServicioController',['except' => ['create','destroy']]); 
 Route::get('servicios-detalle/{id}','Servicio\ServicioController@detalle');
 Route::get('servicios-usuario/{id}','Servicio\ServicioController@serviciosUsuario');
 Route::get('servicio-titular/{id}','Servicio\ServicioController@obtenerUsuarioTitular');
