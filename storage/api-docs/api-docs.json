@@ -1487,6 +1487,237 @@
                 ]
             }
         },
+        "/api/grafica-recaudacion-general": {
+            "post": {
+                "tags": [
+                    "Reportes gr\u00e1ficos"
+                ],
+                "summary": "Crear gr\u00e1fico de reporte de recaudaci\u00f3n",
+                "parameters": [
+                    {
+                        "name": "Fechas",
+                        "in": "path",
+                        "description": "Rango de fechas",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve objeto json con los datos de recaudacion general."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/grafica-solicitud-servicio": {
+            "post": {
+                "tags": [
+                    "Reportes gr\u00e1ficos"
+                ],
+                "summary": "Crear gr\u00e1fico de reporte de solicitud de servicio",
+                "parameters": [
+                    {
+                        "name": "Fechas",
+                        "in": "path",
+                        "description": "Rango de fechas",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve objeto json con los datos de solicitudes de servicios."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/grafica-recaudacion-tipo": {
+            "post": {
+                "tags": [
+                    "Reportes gr\u00e1ficos"
+                ],
+                "summary": "Crear gr\u00e1fico de reporte de recaudaci\u00f3n por tipo",
+                "parameters": [
+                    {
+                        "name": "Fechas",
+                        "in": "path",
+                        "description": "Rango de fechas",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Devuelve objeto json con los datos de recaudaci\u00f3n por tipo."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/reporte-obtener-estados": {
+            "get": {
+                "tags": [
+                    "Reportes pdf"
+                ],
+                "summary": "Mostrar un listado de estados",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar un listado de estados."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/generar-reporte-servicios": {
+            "post": {
+                "tags": [
+                    "Reportes pdf"
+                ],
+                "summary": "Crear pdf de reporte de servicios",
+                "parameters": [
+                    {
+                        "name": "Fechas",
+                        "in": "path",
+                        "description": "Rango de fechas",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Crear pdf de reporte de servicios."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/generar-reporte-solicitudes": {
+            "post": {
+                "tags": [
+                    "Reportes pdf"
+                ],
+                "summary": "Crear pdf de reporte de solicitudes",
+                "parameters": [
+                    {
+                        "name": "Fechas",
+                        "in": "path",
+                        "description": "Rango de fechas",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Crear pdf de reporte de solicitudes en un rango determinado."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/generar-reporte-morosos": {
+            "post": {
+                "tags": [
+                    "Reportes pdf"
+                ],
+                "summary": "Crear pdf de reporte de morosos",
+                "parameters": [
+                    {
+                        "name": "Fechas",
+                        "in": "path",
+                        "description": "Rango de fechas",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Crear pdf de reporte de morosos en un rango determinado."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/generar-reporte-recaudacion": {
+            "post": {
+                "tags": [
+                    "Reportes pdf"
+                ],
+                "summary": "Crear pdf de reporte recaudaci\u00f3n",
+                "parameters": [
+                    {
+                        "name": "Fechas",
+                        "in": "path",
+                        "description": "Rango de fechas",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Crear pdf de reporte recaudaci\u00f3n en un rango determinado."
+                    },
+                    "default": {
+                        "description": "Falla inesperada. Intente luego"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/api/servicios": {
             "get": {
                 "tags": [

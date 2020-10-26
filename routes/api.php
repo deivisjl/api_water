@@ -77,3 +77,9 @@ Route::get('mis-servicios-detalle','MiServicio\MiServicioController@detalle');
 Route::post('grafica-recaudacion-general','Reporte\ReporteController@graficaRecaudacionGeneral');
 Route::post('grafica-solicitud-servicio','Reporte\ReporteController@graficaSolicitudServicio');
 Route::post('grafica-recaudacion-tipo','Reporte\ReporteController@graficaRecaudacionTipoServicio');
+
+Route::get('reporte-obtener-estados','Reporte\ReporteDocumentoController@obtenerEstadoServicio');
+Route::post('generar-reporte-servicios','Reporte\ReporteDocumentoController@generarReporteServicio');
+Route::post('generar-reporte-solicitudes','Reporte\ReporteDocumentoController@generarReporteSolicitudes');
+Route::post('generar-reporte-morosos','Reporte\ReporteDocumentoController@generarReporteMorosos');
+Route::post('generar-reporte-recaudacion','Reporte\ReporteDocumentoController@generarReporteRecaudacion');

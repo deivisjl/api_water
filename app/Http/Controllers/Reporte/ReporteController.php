@@ -12,6 +12,29 @@ class ReporteController extends ApiController
 {
     private $meses = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
+    /**
+    * @SWG\Post(
+    *     path="/api/grafica-recaudacion-general",
+    *     summary="Crear gráfico de reporte de recaudación",
+    *     tags={"Reportes gráficos"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Fechas",
+    *          description="Rango de fechas",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Devuelve objeto json con los datos de recaudacion general."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function graficaRecaudacionGeneral(Request $request)
     {
         $rules = [
@@ -57,7 +80,7 @@ class ReporteController extends ApiController
             return $this->errorResponse($e->getMessage(),423);
         }
     }
-
+    
     public function construirRespuestaRecaudacion($data)
     {
         $respuesta = array();
@@ -85,7 +108,29 @@ class ReporteController extends ApiController
 
         return $respuesta;
     }
-
+    /**
+    * @SWG\Post(
+    *     path="/api/grafica-solicitud-servicio",
+    *     summary="Crear gráfico de reporte de solicitud de servicio",
+    *     tags={"Reportes gráficos"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Fechas",
+    *          description="Rango de fechas",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Devuelve objeto json con los datos de solicitudes de servicios."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function graficaSolicitudServicio(Request $request)
     {
         $rules = [
@@ -117,7 +162,7 @@ class ReporteController extends ApiController
         }
 
     }
-
+    
     public function construirSolicitudServicio($data)
     {
         $resp = array();
@@ -131,7 +176,29 @@ class ReporteController extends ApiController
 
         return $resp;
     }
-
+    /**
+    * @SWG\Post(
+    *     path="/api/grafica-recaudacion-tipo",
+    *     summary="Crear gráfico de reporte de recaudación por tipo",
+    *     tags={"Reportes gráficos"},
+    *     security={ {"bearer": {} }},
+    *      @SWG\Parameter(
+    *          name="Fechas",
+    *          description="Rango de fechas",
+    *          required=true,
+    *          in="path",
+    *          type="string"    
+    *      ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Devuelve objeto json con los datos de recaudación por tipo."
+    *     ),
+    *     @SWG\Response(
+    *         response="default",
+    *         description="Falla inesperada. Intente luego"
+    *     )
+    * )
+    */
     public function graficaRecaudacionTipoServicio(Request $request)
     {
         $rules = [
