@@ -46,7 +46,7 @@
                 <th style="width: 30%">Titular</th>
                 <th style="width: 10%;">DPI</th>
                 <th style="width: 20%;">Ubicación</th>
-                <th style="width: 15%">Correo electrónico</th>
+                <th style="width: 15%">Correo</th>
             </tr>
         </thead>
         <tbody>

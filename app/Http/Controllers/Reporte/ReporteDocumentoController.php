@@ -153,7 +153,7 @@ class ReporteDocumentoController extends ApiController
             
             $fecha = Carbon::now()->format('dmY_h:m:s');
 
-            return $pdf->stream('reporte_'.$fecha.'.pdf');
+            return $pdf->download('reporte_'.$fecha.'.pdf');
         } 
         catch (\Exception $ex) 
         {
@@ -219,7 +219,7 @@ class ReporteDocumentoController extends ApiController
             
             $fecha = Carbon::now()->format('dmY_h:m:s');
 
-            return $pdf->stream('reporte_'.$fecha.'.pdf');
+            return $pdf->download('reporte_'.$fecha.'.pdf');
         } 
         catch (\Exception $ex) 
         {
