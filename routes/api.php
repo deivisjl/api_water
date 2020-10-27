@@ -85,3 +85,9 @@ Route::post('generar-reporte-servicios','Reporte\ReporteDocumentoController@gene
 Route::post('generar-reporte-solicitudes','Reporte\ReporteDocumentoController@generarReporteSolicitudes');
 Route::post('generar-reporte-morosos','Reporte\ReporteDocumentoController@generarReporteMorosos');
 Route::post('generar-reporte-recaudacion','Reporte\ReporteDocumentoController@generarReporteRecaudacion');
+
+/* Rutas de backup */
+Route::post('backup-crear','Backup\BackupController@crearRespaldo');
+Route::get('backup-mostrar','Backup\BackupController@mostrar');
+Route::get('backup-descargar/{id}','Backup\BackupController@descargar');
+Route::get('backup-eliminar/{id}','Backup\BackupController@eliminar');
