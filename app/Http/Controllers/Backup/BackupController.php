@@ -68,7 +68,7 @@ class BackupController extends ApiController
                 $fecha = Carbon::now()->format('d_m_Y_h_m_s');
                 
                 $backup_file_name = 'SISCAP' . '_backup_' . $fecha . '.sql';
-                $fileHandler = fopen(storage_path() .'\app\\'. $backup_file_name, 'w+');
+                $fileHandler = fopen(storage_path() .'/app//'. $backup_file_name, 'w+');
                 $number_of_lines = fwrite($fileHandler, $script);
                 fclose($fileHandler);
                 
