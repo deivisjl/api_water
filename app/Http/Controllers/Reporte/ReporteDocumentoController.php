@@ -81,7 +81,7 @@ class ReporteDocumentoController extends ApiController
 
             $estado = EstadoServicio::findOrFail($request->get('estado'));
 
-            $pdf = \PDF::loadView('pdf-servicio',['registros' => $registros, 'estado' => $estado->nombre])->setPaper('letter','landscape');
+            $pdf = \PDF::loadView('pdf-servicio',['registros' => $registros, 'estado' => $estado->nombre])->setPaper('legal','landscape');
             
             $fecha = Carbon::now()->format('dmY_h:m:s');
 
@@ -149,7 +149,7 @@ class ReporteDocumentoController extends ApiController
                         ->whereBetween('s.fecha_solicitud',[$desde, $hasta])
                         ->get();            
 
-            $pdf = \PDF::loadView('pdf-solicitudes',['registros' => $registros, 'desde' => $desde, 'hasta' => $hasta])->setPaper('letter','landscape');
+            $pdf = \PDF::loadView('pdf-solicitudes',['registros' => $registros, 'desde' => $desde, 'hasta' => $hasta])->setPaper('legal','landscape');
             
             $fecha = Carbon::now()->format('dmY_h:m:s');
 
@@ -215,7 +215,7 @@ class ReporteDocumentoController extends ApiController
 
             $hasta = Carbon::parse($request->get('hasta'))->format('d/m/Y');
 
-            $pdf = \PDF::loadView('pdf-morosos',['registros' => $registros, 'hasta' => $hasta])->setPaper('letter','landscape');
+            $pdf = \PDF::loadView('pdf-morosos',['registros' => $registros, 'hasta' => $hasta])->setPaper('legal','landscape');
             
             $fecha = Carbon::now()->format('dmY_h:m:s');
 
@@ -284,7 +284,7 @@ class ReporteDocumentoController extends ApiController
 
             $resp = $this->construirRespuestaRecaudacion($registros);           
 
-            $pdf = \PDF::loadView('pdf-recaudacion',['registros' => $resp, 'desde' => $desde, 'hasta' => $hasta])->setPaper('letter','portrait');
+            $pdf = \PDF::loadView('pdf-recaudacion',['registros' => $resp, 'desde' => $desde, 'hasta' => $hasta])->setPaper('legal','portrait');
             
             $fecha = Carbon::now()->format('dmY_h:m:s');
 
